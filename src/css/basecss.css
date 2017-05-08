@@ -1,0 +1,60 @@
+@charset "utf-8";
+/* CSS Document */
+
+/*Header div containing: menubar, login */
+#header_div {
+	position: relative;
+	width: 100%;
+	height: 175px;
+	background-color: #09F;
+}
+#menubar {
+	position: absolute;
+	width: 100%;
+	top: 75%;
+	
+	background-color: #CCC;
+	text-align: center;
+	font-size: 30px;	
+}
+#login_div {
+	position: absolute;
+	top: 10px;
+	margin-left: 90%;	
+}
+
+
+
+#body_div {
+	width: 100%;
+	height: 500px;
+	background-color: #FCF;
+	
+}
+#product_display {
+	position: absolute;
+	width: 30%;
+	height: 500px;
+	background-color: #F90;	
+}
+#product_list {
+	margin-left: 30%;
+	height: 500px;
+	background-color: #9F6;	
+}
+#prod_list_links {
+	margin-left: 50%;
+	height: 25px;
+	background-color: #03F;	
+}
+#product_search_results {
+	height: 475px;
+	background-color: #FFF;	
+}
+
+#footer_div {
+	width: 100%;
+	height: 50px;
+	background-color: #09F;
+	
+}

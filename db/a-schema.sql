@@ -36,7 +36,7 @@ DROP TABLE IF EXISTS `BeerStoreDB`.`tblProducts` ;
 
 CREATE TABLE IF NOT EXISTS `BeerStoreDB`.`tblProducts` (
   `prod_id` INT NOT NULL AUTO_INCREMENT,
-  `prodt_name` VARCHAR(45) NULL,
+  `prod_name` VARCHAR(45) NULL,
   `prod_description` MEDIUMTEXT NULL,
   `prod_picture` VARCHAR(255) NULL,
   `prod_price` DECIMAL(9,2) NULL,

@@ -2,10 +2,10 @@
 
 <?php
 
-$username = "mmilholm";
-$password = "Stickboy18";
+$username = "root";
+$password = "";
 $host = "localhost";
-$dbname = "ics199demodb";
+$dbname = "BeerStoreDB";
 
 $dsn = "mysql:host=localhost;dbname=$dbname";
 

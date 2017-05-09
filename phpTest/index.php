@@ -2,13 +2,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link rel="stylesheet" type="text/css" href="basecss.css">
+<link rel="stylesheet" type="text/css" href="src/ css/basecss.css">
 <title>the beer shoppe - Camosun ICS Year One Project</title>
 </head>
 
 <body>
 
-<?php require_once "testFunction.php"; 
+<?php require_once "dbSearch.php"; 
 $product = new Search ();
 
 ?>
@@ -47,17 +47,11 @@ $product = new Search ();
     	<div id="product_search_results">
     	
     	<?php 
-    		if ($_GET['hello']) {
-    			$product->searchLimit('Inception');
-    		}
-    		else { 
-    			$product->searchLimit('%'); 
-    		}
     		
     		$names = $product->getProdName ();
     		foreach ($names as $name) {
     	?>
-        <p style="background-color: #C3F; width: 100px; height:100px; margin-left: 20px; margin-top: 50px; float:left; border-radius: 5px;"> <?php echo $name[prod_name]; ?></p>
+        <p style="background-color: #C3F; width: 100px; height:100px; margin-left: 20px; margin-top: 50px; float:left; border-radius: 5px;"> <?php echo $name['prod_name']; ?></p>
         
         <?php
         }

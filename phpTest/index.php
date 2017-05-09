@@ -2,11 +2,17 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link rel="stylesheet" type="text/css" href="css/basecss.css">
+<link rel="stylesheet" type="text/css" href="basecss.css">
 <title>the beer shoppe - Camosun ICS Year One Project</title>
 </head>
 
 <body>
+
+<?php require_once "testFunction.php"; 
+$product = new Search ();
+
+?>
+
 <div id="header_div">
 	<div id="login_div">
 	<a href=""> Hello, Sign in </a>  / <a href=""> Cart(#) </a>
@@ -14,9 +20,10 @@
     	
 	<div id="menubar">
     <a href="">Home</a>  &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp; 
-    <a href="">Beer</a>  &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp; 
-    <a href="">Gifts</a>  &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp; 
-    <a href="">Contact</a>
+    <a href="index.php?hello=true">Beer</a>  &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp; 
+    <a href="index.php?hello=false">Gifts</a>  &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp; 
+    <a href=""> Contact </a> 
+    
     </div>
     
 </div>
@@ -38,7 +45,28 @@
         (When you click one of these links, it searches the db for ie. Ale's and uses the query results to display clickable items - WHen items are clicked, their details open in the product display area where you can adjust the quantity and add it to the cart.)
     	</div>
     	<div id="product_search_results">
-        <p style="background-color: #C3F; width: 100px; height:100px; margin-left: 20px; margin-top: 50px; float:left; border-radius: 5px;">A product picture, with some other info?</p>
+    	
+    	<?php 
+    		if ($_GET['hello']) {
+    			$product->searchLimit('Inception');
+    		}
+    		else { 
+    			$product->searchLimit('%'); 
+    		}
+    		
+    		$names = $product->getProdName ();
+    		foreach ($names as $name) {
+    	?>
+        <p style="background-color: #C3F; width: 100px; height:100px; margin-left: 20px; margin-top: 50px; float:left; border-radius: 5px;"> <?php echo $name[prod_name]; ?></p>
+        
+        <?php
+        }
+        ?>
+        
+        
+        
+        
+        
         <p style="background-color: #C3F; width: 100px; height:100px; margin-left: 20px; margin-top: 50px; float:left; border-radius: 5px;">Test</p>
         <p style="background-color: #C3F; width: 100px; height:100px; margin-left: 20px; margin-top: 50px; float:left; border-radius: 5px;">When the window size is small, maybe these can have an add to cart / quantity to them</p>
         <p style="background-color: #C3F; width: 100px; height:100px; margin-left: 20px; margin-top: 50px; float:left; border-radius: 5px;">Test</p>

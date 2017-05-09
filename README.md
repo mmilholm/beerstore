@@ -1,5 +1,5 @@
-# ICS 199 Applied Computing Project - Project Template
-[![build status](https://gitlab.camosun.bc.ca/ics199/ics199-project-template/badges/master/build.svg)](https://gitlab.camosun.bc.ca/ics199/ics199-project-template/commits/master)
+# ICS 199 BeerStore - Project Template
+[![build status](https://gitlab.camosun.bc.ca/ics199grp07/BeerStore/badges/master/build.svg)](https://gitlab.camosun.bc.ca/ics199grp07/BeerStore/commits/master)
 
 ## Purpose:
 This Git Repository is a starting template for your project. The *Collaborating with Git and GitLab slides* explain how to use this to start your own team's project.

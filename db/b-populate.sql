@@ -1,9 +1,5 @@
 use BeerStoreDB;
 
-DROP TABLE 'tblProductCategories';
-DROP TABLE 'tblProducts';
-
-
 INSERT INTO tblProductCategories
 	(cat_name)
 VALUES

@@ -35,6 +35,6 @@ INSERT INTO tblProducts
 	('Victoria Lager', 'Vancouver Island Brewing', 'A brew made to be drunk in Victoria', '/dbImages/beer_lager_victoria.png', '6 pack', 11.49, 2),
 	('Keepers Stout', 'Lighthouse', 'This one\'s a keeper', '/dbImages/beer_stout_keepers', '6 pack', 12.49, 3),
 	('Seaport Vanilla Stout', 'Lighthouse', 'Its good, trust us', '/dbImages/beer_stout_seaport.png', '6 pack', 12.99, 3),
-	('Voltage Espresso Stout', 'Hoyne' 'If you need something to jolt you', '/dbImages/beer_stout_voltage.png', 'Bomber', 5.49, 3);
+	('Voltage Espresso Stout', 'Hoyne', 'If you need something to jolt you', '/dbImages/beer_stout_voltage.png', 'Bomber', 5.49, 3);
 				
 	

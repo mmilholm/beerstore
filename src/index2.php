@@ -8,10 +8,7 @@
 
 <body>
 
-<?php require_once "dbSearch.php"; 
-$product = new Search ();
-
-?>
+<?php require_once "model/db_functions.php"; ?>
 
 <div id="header_div">
 	<div id="login_div">
@@ -42,31 +39,21 @@ $product = new Search ();
     	Lager&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
     	Stout&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
     	IPA<br />
-        (When you click one of these links, it searches the db for ie. Ale's and uses the query results to display clickable items - WHen items are clicked, their details open in the product display area where you can adjust the quantity and add it to the cart.)
+        
+        
+       <!-- (When you click one of these links, it searches the db for ie. Ale's and uses the query results to display clickable items - WHen items are clicked, their details open in the product display area where you can adjust the quantity and add it to the cart.) -->
     	</div>
     	<div id="product_search_results">
     	
     	<?php 
-    		
-    		$names = $product->getProdName ();
+    		$names = getProdInfo();
     		foreach ($names as $name) {
     	?>
-        <p style="background-color: #C3F; width: 100px; height:100px; margin-left: 20px; margin-top: 50px; float:left; border-radius: 5px;"> <?php echo $name['prod_name']; ?></p>
+        <p style="background-color: #C3F; width: 100px; height:100px; margin-left: 20px; margin-top: 50px; float:left; border-radius: 5px;"> <img src="<?php echo $name[prod_picture]; ?>"> <br> <?php echo $name['prod_name']; ?></p>
         
         <?php
         }
         ?>
-        
-        
-        
-        
-        
-        <p style="background-color: #C3F; width: 100px; height:100px; margin-left: 20px; margin-top: 50px; float:left; border-radius: 5px;">Test</p>
-        <p style="background-color: #C3F; width: 100px; height:100px; margin-left: 20px; margin-top: 50px; float:left; border-radius: 5px;">When the window size is small, maybe these can have an add to cart / quantity to them</p>
-        <p style="background-color: #C3F; width: 100px; height:100px; margin-left: 20px; margin-top: 50px; float:left; border-radius: 5px;">Test</p>
-        <p style="background-color: #C3F; width: 100px; height:100px; margin-left: 20px; margin-top: 50px; float:left; border-radius: 5px;">Test</p>
-        <p style="background-color: #C3F; width: 100px; height:100px; margin-left: 20px; margin-top: 50px; float:left; border-radius: 5px;">Test</p>
-        
         </div>
     </div>
 </div>

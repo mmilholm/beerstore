@@ -1,5 +1,7 @@
 <?php
 
+require_once 'db_connect.php';
+
 /** 
  * This function takes in a first and last name
  * and stores it in the database
@@ -42,5 +44,21 @@ function getAllNames()
     return $names;
 
 }
+
+function getProdInfo() 
+{
+
+    global $dbc;
+    
+    $query = 'SELECT * from tblProducts ORDER BY cat_id';
+    $statement = $dbc->prepare($query);
+    $statement->execute();
+    $names = $statement->fetchAll();
+    $statement->closeCursor();
+    return $names;
+
+}
+
+
 
 ?>

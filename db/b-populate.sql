@@ -33,8 +33,15 @@ INSERT INTO tblProducts
 	('Cypress Honey Lager', 'Granville Island', 'Pooh go to brew!', '/dbImages/beer_lager_cypresshoney.png', '6 pack', 13.99, 2),
 	('Helios', 'Hoyne', 'A hot seller', '/dbImages/beer_lager_helios.png', 'Bomber', 4.99, 2),
 	('Victoria Lager', 'Vancouver Island Brewing', 'A brew made to be drunk in Victoria', '/dbImages/beer_lager_victoria.png', '6 pack', 11.49, 2),
-	('Keepers Stout', 'Lighthouse', 'This one\'s a keeper', '/dbImages/beer_stout_keepers', '6 pack', 12.49, 3),
+	('Keepers Stout', 'Lighthouse', 'This one\'s a keeper', '/dbImages/beer_stout_keepers.png', '6 pack', 12.49, 3),
 	('Seaport Vanilla Stout', 'Lighthouse', 'Its good, trust us', '/dbImages/beer_stout_seaport.png', '6 pack', 12.99, 3),
-	('Voltage Espresso Stout', 'Hoyne', 'If you need something to jolt you', '/dbImages/beer_stout_voltage.png', 'Bomber', 5.49, 3);
-				
-	
+	('Voltage Espresso Stout', 'Hoyne', 'If you need something to jolt you', '/dbImages/beer_stout_voltage.png', 'Bomber', 5.49, 3),
+	('Son of Morning Tee', 'Driftwood', '100% cotten 3/4 sleave shirt', '/dbImages/clothing_driftwood_shirt.png', null, 25.00, 5),
+	('Grey Snap Back Hat', 'Four Winds', 'Cotten twill snap back ball cap', '/dbImages/clothing_fourwinds_hat.jpg', null, 30.00, 5),
+	('Toque', 'Phillips', 'made for the Great White North', '/dbImages/clothing_phillips_toque.png', null, 17.85, 5),
+	('Pint Sleeve', 'Phillips', '16oz phoenix head sleeve', '/dbImages/glassware_phillips_glass.jpg', null, 4.95, 6),
+	('Buck Head Growler', 'Phillips', 'A slick looking growler bottle', '/dbImages/glassware_phillips_growler.jpg', null, 5.00, 6),
+	('Fat Tug Lure', 'Driftwood', 'Guaranteed to catch the big one.', '/dbImages/other_driftwood_lure.png', null, 7.00, 7),
+	('Growler Carrier', 'Four Winds', 'Hand made, insulated growler carrier', '/dbImages/other_fourwinds_growlerCarrier.jpg', null, 40.00, 7),
+	('Amnesiac Plaque', 'Phillips', 'Ready to hang on the wall', '/dbImages/other_phillips_amnesiac_plaque.jpg', null, 26.78, 7),
+	('Bottle Opener', 'Phillips', 'The worlds best bottle opener!', '/dbImages/other_phillips_bottle_opener.png', null, 2.49, 7); 

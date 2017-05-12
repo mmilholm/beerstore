@@ -49,7 +49,7 @@ footer
 			//Search the db and display the products
 			function searchScript(){
 				$("#product_search_results").html("");
-				$type = $beerType;
+				$type = $productType;
 
   				$.ajax({
     				url:'ryanTestSearch.php', //the page containing php script

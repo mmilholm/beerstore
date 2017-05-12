@@ -1,0 +1,12 @@
+<div id="product_display">
+MERCH PAGE LOADED
+</div>
+<div id="product_list">
+<div id="prod_list_links">
+<a href="javascript:$productType = 1; searchScript()">Clothing</a>
+<a href="javascript:$productType = 2; searchScript()">Glassware</a>
+<a href="javascript:$productType= 3; searchScript()">Accessories</a>
+</div>
+<div id="product_search_results">
+</div>
+</div>

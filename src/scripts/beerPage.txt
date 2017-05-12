@@ -1,0 +1,14 @@
+<div id="product_display">
+BEER PAGE LOADED
+</div>
+<div id="product_list">
+<div id="prod_list_links">
+<a href="javascript:$productType = 1; searchScript()">Ale</a>
+<a href="javascript:$productType = 2; searchScript()">Lager</a>
+<a href="javascript:$productType = 3; searchScript()">Stout</a>
+<a href="javascript:$productType = 4; searchScript()">Ipa</a>
+<br />
+</div>
+<div id="product_search_results">
+</div>
+</div>

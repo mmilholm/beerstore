@@ -6,7 +6,8 @@
 <title>the beer shoppe - Camosun ICS Year One Project</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js" type="text/javascript"></script>
 <script type="text/javascript">
-$beerType = 0;
+$productType = 0;
+$pageToLoad = '';
 $resultSet = [];
 </script>
 </head>
@@ -18,14 +19,15 @@ $resultSet = [];
 
 <div id="header_div">
 	<div id="login_div">
-	<a href=""> Hello, Sign in </a>  / <a href=""> Cart(#) </a>
+	<a href="javascript:$pageToLoad = 'userAcct'; pageLoadScript()"> Hello, Sign in </a> /
+	<a href="javascript:$pageToLoad = 'cart'; pageLoadScript()"> Cart(#) </a>
     </div>
 
 	<div id="menubar">
-    <a href="">Home</a>  &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-    <a href="index.php?hello=true">Beer</a>  &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-    <a href="index.php?hello=false">Gifts</a>  &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-    <a href=""> Contact </a>
+    <a href="javascript:$pageToLoad = 'index'; pageLoadScript()">Home</a>  &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+    <a href="javascript:$pageToLoad = 'beer'; pageLoadScript()">Beer</a>  &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+    <a href="javascript:$pageToLoad = 'merch'; pageLoadScript()">Gifts</a>  &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+    <a href="javascript:$pageToLoad = 'contact'; pageLoadScript()"> Contact </a>
 
     </div>
 
@@ -33,34 +35,18 @@ $resultSet = [];
 
 <div id="body_div">
 
-<!-- Make the display window go away when the size of the window is a certain screen width to accomodate for mobile devices -->
 
-<!-- Generate the following code when Beer is clicked -->
-	<div id="product_display">
-    product display area - When window is small enough, this can be hidden to support mobile
-    </div>
 
-<!-- For every item in the database, based on the type of beer you select at the top, have php generate a chunk of code (and insert into page?) preformatted with a search of the chosen type, when you click the item, it opens the details in the product display area, where you can select quantity -->
-    <div id="product_list">
-		<div id="prod_list_links">
-    	<a href="javascript:$beerType = 1; searchScript()">Ale</a>
-    	<a href="javascript:$beerType = 2; searchScript()">Lager</a>
-    	<a href="javascript:$beerType = 3; searchScript()">Stout</a>
-    	<a href="javascript:$beerType = 4; searchScript()">IPA</a><br />
-		</div>
-
-    		<div id="product_search_results">
-
-        	</div>
-    	</div>
-		<!-- End of generated code for Beer -->
 </div>
 
 <div id="footer_div">
 footer
 </div>
 
+
+
 			<script type="text/javascript">
+			//Search the db and display the products
 			function searchScript(){
 				$("#product_search_results").html("");
 				$type = $beerType;
@@ -83,6 +69,60 @@ footer
 							}
 						}
   				});
+				}
+			</script>
+
+			<script type="text/javascript">
+			//Load the page contents in the middle body area based on the link clicked
+					function pageLoadScript(){
+								$("#body_div").html("");
+
+								switch ($pageToLoad){
+
+									case 'beer':
+										$.ajax({
+											url: "scripts/beerPage.txt",
+											datatype: "html",
+											success: function(result){
+												$("#body_div").html(result);}});
+										break;
+
+									case 'merch':
+									$.ajax({
+										url: "scripts/merchPage.txt",
+										datatype: "html",
+										success: function(result){
+											$("#body_div").html(result);}});
+									break;
+
+									case 'contact':
+									$.ajax({
+										url: "scripts/contactPage.txt",
+										datatype: "html",
+										success: function(result){
+											$("#body_div").html(result);}});
+									break;
+
+									case 'userAcct':
+									$.ajax({
+										url: "scripts/userAcctPage.txt",
+										datatype: "html",
+										success: function(result){
+											$("#body_div").html(result);}});
+									break;
+
+									case 'cart':
+									$.ajax({
+										url: "scripts/cartPage.txt",
+										datatype: "html",
+										success: function(result){
+											$("#body_div").html(result);}});
+									break;
+
+									default:
+										$("#body_div").html(indexPage());
+										break;
+					}
 				}
 			</script>
 </body>

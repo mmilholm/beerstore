@@ -49,7 +49,7 @@
     		$names = getProdInfo();
     		foreach ($names as $name) {
     	?>
-        <p style="background-color: #C3F; width: 100px; height:100px; margin-left: 20px; margin-top: 50px; float:left; border-radius: 5px;"> <img src="<?php echo $name[prod_picture]; ?>"> <br> <?php echo $name['prod_name']; ?></p>
+        <p> <img style = "height:200px; width:200px;" src="<?php echo $name[prod_picture]; ?>"> <br> <?php echo $name['prod_name']; ?> <br> <?php echo $name['prod_price']; ?></p><hr>
         
         <?php
         }

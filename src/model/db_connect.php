@@ -19,6 +19,14 @@ if ($env) {
     $password = $url['pass'];
     $dbname = substr($url['path'], 1);
 }
+else {
+$username = "root";
+$password = "";
+$host = "localhost";
+$dbname = "BeerStoreDB";
+}
+
+
 
 // dsn - data source name
 $dsn = "mysql:host=$host;dbname=$dbname";

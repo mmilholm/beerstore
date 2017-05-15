@@ -19,12 +19,12 @@ if ($env) {
     $password = $url['pass'];
     $dbname = substr($url['path'], 1);
 }
-else {
-$username = "root";
-$password = "";
-$host = "localhost";
-$dbname = "BeerStoreDB";
-}
+//else {
+//$username = "root";
+//$password = "";
+///$host = "localhost";
+//$dbname = "BeerStoreDB";
+//}
 
 
 

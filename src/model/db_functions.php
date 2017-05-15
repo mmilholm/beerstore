@@ -2,20 +2,20 @@
 
 require_once 'db_connect.php';
 
-/** 
+/**
  * This function takes in a first and last name
  * and stores it in the database
  *
  * @param string $firstName - the firstName the user entered in the form.
  * @param string $lastName - the lastName the user enterd in the form.
  *
- * @return void 
+ * @return void
  */
 function storeName($firstName, $lastName)
 {
     global $dbc;
-    
-    $query = 'INSERT INTO tblNames (first_name, last_name) 
+
+    $query = 'INSERT INTO tblNames (first_name, last_name)
         VALUES (:firstName, :lastName)';
     $statement = $dbc->prepare($query);
     $statement->bindValue(':firstName', $firstName);
@@ -35,7 +35,7 @@ function storeName($firstName, $lastName)
 function getAllNames()
 {
     global $dbc;
-    
+
     $query = 'SELECT * from tblNames ORDER BY last_name';
     $statement = $dbc->prepare($query);
     $statement->execute();
@@ -45,11 +45,11 @@ function getAllNames()
 
 }
 
-function getProdInfo() 
+function getProdInfo()
 {
 
     global $dbc;
-    
+
     $query = 'SELECT * from tblProducts ORDER BY cat_id';
     $statement = $dbc->prepare($query);
     $statement->execute();
@@ -59,6 +59,22 @@ function getProdInfo()
 
 }
 
+
+function idSearch($id)
+{
+    $id = (int) $id;
+
+    global $dbc;
+
+    $query = 'SELECT * from tblProducts WHERE prod_id = :id';
+    $statement = $dbc->prepare($query);
+    $statement->bindValue(':id', $id);
+    $statement->execute();
+    $names = $statement->fetchAll();
+    $statement->closeCursor();
+    return $names;
+
+}
 
 
 ?>

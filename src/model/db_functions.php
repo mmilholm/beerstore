@@ -60,15 +60,15 @@ function getProdInfo()
 }
 
 
-function idSearch($id)
+function idSearch($prodID)
 {
-    $id = (int) $id;
+    $prodID = (int) $prodID;
 
     global $dbc;
 
-    $query = 'SELECT * from tblProducts WHERE prod_id = :id';
+    $query = 'SELECT * from tblProducts WHERE prod_id = :prodID';
     $statement = $dbc->prepare($query);
-    $statement->bindValue(':id', $id);
+    $statement->bindValue(':prodID', $prodID);
     $statement->execute();
     $names = $statement->fetchAll();
     $statement->closeCursor();

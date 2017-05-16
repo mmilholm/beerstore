@@ -1,3 +1,8 @@
+<?php
+session_start();
+require_once "model/db_functions.php";
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -113,30 +118,73 @@
                     </div>
 
                 </div>
+                <?php
+                  $names = getProdInfo();
+                  foreach ($names as $name) {
+                ?>
 
-                <div class="row">
-
-                    <div class="col-sm-4 col-lg-4 col-md-4">
-                        <div class="thumbnail">
-                            <img src="http://placehold.it/320x150" alt="">
-                            <div class="caption">
-                                <h4 class="pull-right">$24.99</h4>
-                                <h4><a href="product.html">First Product</a>
-                                </h4>
-                                <p>See more snippets like this online store item at <a target="_blank" href="http://www.bootsnipp.com">Bootsnipp - http://bootsnipp.com</a>.</p>
-                            </div>
-                            <div class="ratings">
-                                <p class="pull-right">15 reviews</p>
-                                <p>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                </p>
-                            </div>
+                <div class="col-sm-4 col-lg-4 col-md-4">
+                    <div class="thumbnail">
+                        <img src="<?php echo $name['prod_picture']; ?>" alt="">
+                        <div class="caption">
+                            <h4 class="pull-right"><?php echo $name['prod_price']; ?></h4>
+                            <h4><a href="product.html"><?php echo $name['prod_name']; ?></a>
+                            </h4>
+                            <p><?php echo $name['prod_description']; ?></p>
+                        </div>
+                        <div class="ratings">
+                            <p class="pull-right">
+                              <form action = "" method = "post">
+                                  <fieldset>
+                                    Quantity:
+                                    <input type="number" name="quantity" min="1" max="10" style="width: 100px;">&nbsp&nbsp&nbsp
+                                    <button name = "prod_id" type="submit" value="<?php echo $name['prod_id']; ?>"> Add </button>
+                                    </fieldset>
+                              </form>
+                            </p>
+                            <p>
+                                <span class="glyphicon glyphicon-star"></span>
+                                <span class="glyphicon glyphicon-star"></span>
+                                <span class="glyphicon glyphicon-star"></span>
+                                <span class="glyphicon glyphicon-star"></span>
+                                <span class="glyphicon glyphicon-star"></span>
+                            </p>
                         </div>
                     </div>
+                </div>
+
+                <?php
+                }
+                ?>
+
+                <?php
+                    if (isset($_POST['prod_id'])) {
+                        $quantity = filter_input(INPUT_POST, 'quantity', FILTER_SANITIZE_SPECIAL_CHARS);
+                      $product = filter_input(INPUT_POST, 'prod_id', FILTER_SANITIZE_SPECIAL_CHARS);
+
+
+                        if (!isset($_SESSION['cart'])) {
+                            $_SESSION['cart'] = array ();
+                        }
+
+                      if (array_key_exists($product, $_SESSION['cart']))
+                      {
+                        $quantity += $_SESSION['cart'][$product];
+                        $_SESSION['cart'][$product] = $quantity;
+                      }
+                      else
+                      {
+                        $_SESSION['cart'][$product] = $quantity;
+                      }
+
+
+                      foreach($_SESSION['cart'] as $key => $value) {
+                          echo "The product id is $key <br>";
+                          echo "The quantity is $value <br><hr>";
+                      }
+                  }
+
+                ?>
 
                     <div class="col-sm-4 col-lg-4 col-md-4">
                         <div class="thumbnail">

@@ -10,7 +10,7 @@
         $mypassword = $_POST['password'];
         //echo $_SERVER['DOCUMENT_ROOT'];
         $user = getUser($myusername, $mypassword);
-        $_SESSION['user']['userid'] = $user['user_id'];
+        $_SESSION['user']['user_id'] = $user['user_id'];
         $_SESSION['user']['first_name'] = $user['first_name'];
         $_SESSION['user']['last_name'] = $user['last_name'];
         header('Location:'. $_GET['origin']);

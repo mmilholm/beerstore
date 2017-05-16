@@ -45,3 +45,14 @@ INSERT INTO tblProducts
 	('Growler Carrier', 'Four Winds', 'Hand made, insulated growler carrier', '/dbImages/other_fourwinds_growlerCarrier.png', null, 40.00, 7),
 	('Amnesiac Plaque', 'Phillips', 'Ready to hang on the wall', '/dbImages/other_phillips_amnesiac_plaque.png', null, 26.78, 7),
 	('Bottle Opener', 'Phillips', 'The worlds best bottle opener!', '/dbImages/other_phillips_bottle_opener.png', null, 2.49, 7); 
+	
+INSERT INTO tblUsers
+(first_name,
+ last_name,
+ email,
+ address,
+ phone,
+ password
+)
+Values
+('Georgi','Angelov', 'georgi_angelov@zoho.com', '2771 Jacklin Rd.','2508581220','123456');

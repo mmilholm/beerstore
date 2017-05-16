@@ -3,3 +3,4 @@
 # <--- Uncomment the next two lines when working on your own project. --->
  .env
  db_credentials.php
+/nbproject/private/

@@ -25,7 +25,6 @@ function storeName($firstName, $lastName)
 
 }
 
-
 /**
  * This function generates the result set of
  * the tblNames table.
@@ -74,6 +73,20 @@ function idSearch($prodID)
     $statement->closeCursor();
     return $names;
 
+}
+
+function getUser($username, $password)
+{ 
+    global $dbc;
+
+    $query = 'SELECT  * from tblUsers WHERE email = :username  AND password = :password';
+    $statement = $dbc->prepare($query);
+    $statement->bindValue(':username', $username);
+    $statement->bindValue(':password', $password);
+    $statement->execute();
+    $result = $statement->fetch();
+    $statement->closeCursor();
+    return $result;
 }
 
 

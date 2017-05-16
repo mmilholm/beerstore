@@ -29,7 +29,19 @@ require_once "model/db_functions.php";
 
 <div id="header_div">
 	<div id="login_div">
-	<a href=""> Hello, Sign in </a>  / <a href=""> Cart(#) </a>
+		<?php 
+
+		$current_url = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";	
+		if (isset ($_SESSION['user']) && $_SESSION['user']['userid'] > 0)
+		{
+			echo 'Hello, ' . $_SESSION['user']['first_name']. ' ' .$_SESSION['user']['last_name']. ' <a href="logout.php?origin=' . $current_url . '">Log out</a>';
+		}
+		else
+		{
+			echo '<a href="login.php?origin='. $current_url . '"> Hello, Sign in </a>';
+		}
+		?>
+	   <a href=""> Cart(#) </a>
     </div>
 
 	<div id="menubar">

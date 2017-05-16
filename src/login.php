@@ -98,11 +98,12 @@
                     username<input type="text" name="username" class="form-control"></label>
                 </div>
                  <div class="form-group"><label for="password">
-                    Password<input type="text" name="password" class="form-control"></label>
+                    Password<input type='password' name="password" class="form-control"></label>
                 </div>
 
                 <div class="form-group">
-                  <input type="submit" name="submit" class="btn btn-primary" >
+                  <button type="submit" name="submit" class="btn btn-primary" > Login</button>
+                  <button type="submit" name="submit" class="btn btn-primary" > Sign up</button>
                 </div>
             </form>
         </div>  

@@ -1,9 +1,0 @@
-<div id="product_display">
-CART PAGE LOADED
-</div>
-<div id="product_list">
-<div id="prod_list_links">
-</div>
-<div id="product_search_results">
-</div>
-</div>

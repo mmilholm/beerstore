@@ -31,8 +31,9 @@ require_once "model/db_functions.php";
 	<div id="login_div">
 		<?php 
 
-		$current_url = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";	
-		if (isset ($_SESSION['user']) && $_SESSION['user']['userid'] > 0)
+		$current_url = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+
+		if (isset ($_SESSION['user']) && isset($_SESSION['user']['user_id']))
 		{
 			echo 'Hello, ' . $_SESSION['user']['first_name']. ' ' .$_SESSION['user']['last_name']. ' <a href="logout.php?origin=' . $current_url . '">Log out</a>';
 		}

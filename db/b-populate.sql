@@ -57,4 +57,5 @@ INSERT INTO tblUsers
 Values
 ('Georgi','Angelov', 'georgi_angelov@zoho.com', '2771 Jacklin Rd.','2508581220','123456'),
 ('Matt', 'Milholm', 'mmilholm@gmail.com', '1405 Esquimalt Rd.', '2506616945', 'abc123'),
-('Bob', 'Dole', 'abc@gmail.com', '1 Esquimalt Rd.', '2501234567', 'asd123');
+('Bob', 'Dole', 'abc@gmail.com', '1 Esquimalt Rd.', '2501234567', 'asd123'),
+('Tom', 'Plavetic', 'tominhulk@gmail.com', '4496 Wilkinson road', '2508021868', 'tom123');

@@ -74,6 +74,30 @@ function idSearch($prodID)
     return $names;
 
 }
+//Creating an order in the db
+function createOrder($userID){
+  $userID = (int) $userID;
+  global $dbc;
+
+  $query = 'INSERT INTO tblorders(user_id, order_date) VALUES(:userID, CURRENT_DATE)';
+  $statement = $dbc->prepare($query);
+  $statement->bindValue(':userID', $userID);
+  $statement->execute();
+  $statement->closeCursor();
+}
+
+function getOrderID($userID){
+  $userID = (int) $userID;
+  global $dbc;
+
+  $query = 'SELECT order_id from tblorders WHERE user_id = :userID AND payed = 0';
+  $statement = $dbc->prepare($query);
+  $statement->bindValue(':userID', $userID);
+  $statement->execute();
+  $orderNum = $statement->fetch();
+  $statement->closeCursor();
+  return $orderNum;
+}
 
 function getUser($username, $password)
 { 

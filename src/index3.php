@@ -60,7 +60,9 @@ require_once "model/db_functions.php";
 	<div class="row">
 		<div class="col-sm-3 well">
 			<!-- could put a search form here is wanted -->
-			A spot to put a search form if we want
+			    <form action="" method="post">
+					<button class="btn btn-info" name = "seshReset" type="submit" value="1"> Reset Session </button>
+				</form>
 		</div>
 		
 		
@@ -106,7 +108,13 @@ require_once "model/db_functions.php";
 </div>
         
         <?php
-        
+            $getUserID = 0;
+
+              if (isset($_POST['seshReset'])){
+                session_unset();
+                exit();
+              }
+			  
         	print_r($_SESSION['user']);
  
             	if (isset($_POST['prod_id'])) {
@@ -117,7 +125,25 @@ require_once "model/db_functions.php";
                 	if (!isset($_SESSION['cart'])) {
                     	$_SESSION['cart'] = array ();
                 	}
+					//If an order has already been created, add the product to the order
+                    //if (isset($_SESSION['order_created'])){
+                      // Get the order id
+                      //$ordID = getOrderID($_SESSION['user']['user_id']);
+                      // Add item call here
+                    //}
 
+                    //If an order has not been created yet, create one and add the item to the order
+                    if (!isset($_SESSION['order_created'])){
+                      $_SESSION['order_created'] = true;
+
+                      if(isset($_SESSION['user']['user_id'])){
+                        $getUserID = $_SESSION['user']['user_id'];
+                        createOrder($getUserID);
+                        //Get order ID
+                        //$ordID = getOrderID($_SESSION['user']['user_id']);
+                        //Add item call here
+                      }
+                    }
  	            	if (array_key_exists($product, $_SESSION['cart']))
  	            	{
  		            	$quantity += $_SESSION['cart'][$product];

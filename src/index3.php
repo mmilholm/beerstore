@@ -11,11 +11,11 @@ require_once "model/db_functions.php";
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-	
+
 	<link rel="stylesheet" type="text/css" href="css/basecss.css">
-	
+
 	<title>the beer shoppe - Camosun ICS Year One Project</title>
-	
+
 	<!-- Bootstrap Core CSS -->
     <!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -29,7 +29,7 @@ require_once "model/db_functions.php";
 
 <div id="header_div">
 	<div id="login_div">
-		<?php 
+		<?php
 
 		$current_url = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 
@@ -47,9 +47,10 @@ require_once "model/db_functions.php";
 
 	<div id="menubar">
     <a href="">Home</a>  &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-    <a href="index.php?hello=true">Beer</a>  &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-    <a href="index.php?hello=false">Gifts</a>  &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-    <a href=""> Contact </a>
+    <a href="beer.php">Beer</a>  &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+    <a href="merch.php">Gifts</a>  &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+    <a href="contact.php">Contact</a>  &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+
 
     </div>
 
@@ -62,30 +63,32 @@ require_once "model/db_functions.php";
 			<!-- could put a search form here is wanted -->
 			    <form action="" method="post">
 					<button class="btn btn-info" name = "seshReset" type="submit" value="1"> Reset Session </button>
-				</form>
+				  </form>
+
 		</div>
-		
-		
-		
-		
+
+
+
+
 		<div class="col-sm-9">
 		<?php
-			$count = 0;
-    		$names = getProdInfo();
+
+			  $count = 0;
+    		$names = getProdInfo($_POST['itemType']);
     		foreach ($names as $name) {
     			if ($count % 3 == 0) echo '<div class="row">';
 		?>
-				<div class="col-sm-4">		
+				<div class="col-sm-4">
 					<div class="well">
 						<form action = "" method = "post">
     						<fieldset>
                 				<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#<?php echo $name['prod_id']; ?>">
-                				
+
                 				<?php echo $name['company_name'] . "<br>" . $name['prod_name']; ?> <br><br>
                 				<img class="img-thumbnail" style = "height:200px; width:200px;" src="<?php echo $name[prod_picture]; ?>"> <br><br> <?php if ($name['prod_package'] != null) { echo $name['prod_package'] . " --- ";} echo "$" . $name['prod_price']; ?></p>
-                				
+
                 				</a>
-                				
+
                 				<div id="<?php echo $name['prod_id']; ?>" class="collapse">
                 					<?php echo $name['prod_description'] . "<br><br>" ?>
                 					Quantity:
@@ -96,17 +99,17 @@ require_once "model/db_functions.php";
         				</form>
         			</div>
 				</div>
-		
+
 		<?php
 			$count++;
 			if ($count % 3 == 0) echo '</div>';
 			}
-		?>	
+		?>
 		</div>
-		
+
 	</div>
 </div>
-        
+
         <?php
             $getUserID = 0;
 
@@ -114,9 +117,9 @@ require_once "model/db_functions.php";
                 session_unset();
                 exit();
               }
-			  
+
         	print_r($_SESSION['user']);
- 
+
             	if (isset($_POST['prod_id'])) {
                 	$quantity = filter_input(INPUT_POST, 'quantity', FILTER_SANITIZE_SPECIAL_CHARS);
 	            	$product = filter_input(INPUT_POST, 'prod_id', FILTER_SANITIZE_SPECIAL_CHARS);
@@ -153,14 +156,14 @@ require_once "model/db_functions.php";
  	            	{
  		            	$_SESSION['cart'][$product] = $quantity;
  	            	}
-					
+
 
  	            	foreach($_SESSION['cart'] as $key => $value) {
 	                	echo "The product id is $key <br>";
 	                	echo "The quantity is $value <br><hr>";
 	            	}
 	        	}
-	        
+
         ?>
 
 
@@ -168,10 +171,10 @@ require_once "model/db_functions.php";
 <div id="footer_div">
 footer
 </div>
-	
 
-	
-	
+
+
+
     <!-- jQuery -->
     <script src="js/jquery.js"></script>
 

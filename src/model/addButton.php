@@ -1,9 +1,9 @@
 <?php
 
-if(isset($_SESSION['user']) && !empty($_SESSION['user'])) { ?>
+if(isset($_SESSION['user']['user_id']) && !empty($_SESSION['user']['user_id'])) { ?>
 	<button class="btn btn-info" name = "prod_id" type="submit" value="<?php echo $name['prod_id']; ?>"> Add </button>
-		
-<?php 
+
+<?php
 
 } else {
 
@@ -15,7 +15,7 @@ if(isset($_SESSION['user']) && !empty($_SESSION['user'])) { ?>
   <!-- Modal -->
   <div class="modal fade" id="myModal<?php echo $name['prod_id']; ?>" role="dialog">
     <div class="modal-dialog">
-    
+
       <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-header">
@@ -30,8 +30,8 @@ if(isset($_SESSION['user']) && !empty($_SESSION['user'])) { ?>
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         </div>
       </div>
-      
+
     </div>
   </div>
-   
+
 <?php } ?>

@@ -88,7 +88,7 @@ require_once "model/db_functions.php";
                 					<?php echo $name['prod_description'] . "<br><br>" ?>
                 					Quantity:
                 					<input type="number" name="quantity" min="1" max="10">
-                					<button class="btn btn-info" name = "prod_id" type="submit" value="<?php echo $name['prod_id']; ?>"> Add </button>
+                					<?php require 'model/addButton.php'; ?>
             					</div>
             				</fieldset>
         				</form>
@@ -106,32 +106,35 @@ require_once "model/db_functions.php";
 </div>
         
         <?php
-            if (isset($_POST['prod_id'])) {
-                $quantity = filter_input(INPUT_POST, 'quantity', FILTER_SANITIZE_SPECIAL_CHARS);
-	            $product = filter_input(INPUT_POST, 'prod_id', FILTER_SANITIZE_SPECIAL_CHARS);
+        
+        	print_r($_SESSION['user']);
+ 
+            	if (isset($_POST['prod_id'])) {
+                	$quantity = filter_input(INPUT_POST, 'quantity', FILTER_SANITIZE_SPECIAL_CHARS);
+	            	$product = filter_input(INPUT_POST, 'prod_id', FILTER_SANITIZE_SPECIAL_CHARS);
 
 
-                if (!isset($_SESSION['cart'])) {
-                    $_SESSION['cart'] = array ();
-                }
+                	if (!isset($_SESSION['cart'])) {
+                    	$_SESSION['cart'] = array ();
+                	}
 
- 	            if (array_key_exists($product, $_SESSION['cart']))
- 	            {
- 		            $quantity += $_SESSION['cart'][$product];
- 		            $_SESSION['cart'][$product] = $quantity;
- 	            }
- 	            else
- 	            {
- 		            $_SESSION['cart'][$product] = $quantity;
- 	            }
+ 	            	if (array_key_exists($product, $_SESSION['cart']))
+ 	            	{
+ 		            	$quantity += $_SESSION['cart'][$product];
+ 		            	$_SESSION['cart'][$product] = $quantity;
+ 	            	}
+ 	            	else
+ 	            	{
+ 		            	$_SESSION['cart'][$product] = $quantity;
+ 	            	}
+					
 
-
- 	            foreach($_SESSION['cart'] as $key => $value) {
-	                echo "The product id is $key <br>";
-	                echo "The quantity is $value <br><hr>";
-	            }
-	        }
-
+ 	            	foreach($_SESSION['cart'] as $key => $value) {
+	                	echo "The product id is $key <br>";
+	                	echo "The quantity is $value <br><hr>";
+	            	}
+	        	}
+	        
         ?>
 
 

@@ -1,4 +1,4 @@
-use BeerStoreDB;
+ use BeerStoreDB;
 
 INSERT INTO tblProductCategories
 	(cat_name)
@@ -55,4 +55,5 @@ INSERT INTO tblUsers
  password
 )
 Values
-('Georgi','Angelov', 'georgi_angelov@zoho.com', '2771 Jacklin Rd.','2508581220','123456');
+('Georgi','Angelov', 'georgi_angelov@zoho.com', '2771 Jacklin Rd.','2508581220','123456'),
+('Matt', 'Milholm', 'mmilholm@gmail.com', '1405 Esquimalt Rd.', '2506616945', 'abc123');

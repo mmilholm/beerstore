@@ -44,13 +44,14 @@ function getAllNames()
 
 }
 
-function getProdInfo()
+function getProdInfo($category)
 {
-
+    $category = (int) $category;
     global $dbc;
 
-    $query = 'SELECT * from tblProducts ORDER BY cat_id';
+    $query = 'SELECT * from tblProducts WHERE cat_id = :category ORDER BY cat_id';
     $statement = $dbc->prepare($query);
+    $statement->bindValue(':category', $category);
     $statement->execute();
     $names = $statement->fetchAll();
     $statement->closeCursor();
@@ -100,7 +101,7 @@ function getOrderID($userID){
 }
 
 function getUser($username, $password)
-{ 
+{
     global $dbc;
 
     $query = 'SELECT  * from tblUsers WHERE email = :username  AND password = :password';

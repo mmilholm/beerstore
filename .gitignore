@@ -4,3 +4,5 @@
  .env
  db_credentials.php
 /nbproject/private/
+.DS_Store
+src/.DS_Store

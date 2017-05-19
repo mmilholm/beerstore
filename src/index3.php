@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once "model/db_functions.php";
+require "model/cartItems.php";
 ?>
 
 <!DOCTYPE html>
@@ -42,7 +43,7 @@ require_once "model/db_functions.php";
 			echo '<a href="login.php?origin='. $current_url . '"> Hello, Sign in </a>';
 		}
 		?>
-	   <a href=""> Cart(#) </a>
+	   <a href="shopping_cart.php"> Cart(#) </a>
     </div>
 
 	<div id="menubar">
@@ -73,27 +74,30 @@ require_once "model/db_functions.php";
 		<div class="col-sm-9">
 		<?php
 
-			  $count = 0;
-    		$names = getProdInfo($_POST['itemType']);
-    		foreach ($names as $name) {
+			$count = 0;
+    		$items = getAllProducts();
+    		foreach ($items as $item) {
     			if ($count % 3 == 0) echo '<div class="row">';
 		?>
 				<div class="col-sm-4">
 					<div class="well">
 						<form action = "" method = "post">
     						<fieldset>
-                				<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#<?php echo $name['prod_id']; ?>">
+                				<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#<?php echo $item['prod_id']; ?>">
 
-                				<?php echo $name['company_name'] . "<br>" . $name['prod_name']; ?> <br><br>
-                				<img class="img-thumbnail" style = "height:200px; width:200px;" src="<?php echo $name[prod_picture]; ?>"> <br><br> <?php if ($name['prod_package'] != null) { echo $name['prod_package'] . " --- ";} echo "$" . $name['prod_price']; ?></p>
+                				<?php echo $item['company_name'] . "<br>" . $item['prod_name']; ?>
+                				<br><br> <img class="img-thumbnail" style = "height:200px; width:200px;" src="<?php echo $item[prod_picture]; ?>">
+                				    <br><br> <?php if ($item['prod_package'] != null) { echo $item['prod_package'] . " --- ";} echo "$" . $item['prod_price']; ?></p>
 
                 				</a>
 
-                				<div id="<?php echo $name['prod_id']; ?>" class="collapse">
-                					<?php echo $name['prod_description'] . "<br><br>" ?>
+                				<div id="<?php echo $item['prod_id']; ?>" class="collapse">
+                					<?php echo $item['prod_description'] . "<br><br>" ?>
                 					Quantity:
                 					<input type="number" name="quantity" min="1" max="10">
-                					<?php require 'model/addButton.php'; ?>
+                					<input type="hidden" name="prod_id" value="<?php echo $item['prod_id']; ?>">
+                					<input type="hidden" name="price" value="<?php echo $item['prod_price']; ?>">
+                					<button class="btn btn-info" name = "addItem" type="submit"> Add </button>
             					</div>
             				</fieldset>
         				</form>
@@ -111,60 +115,18 @@ require_once "model/db_functions.php";
 </div>
 
         <?php
-            $getUserID = 0;
+            	if (isset($_POST['addItem'])) {
 
-              if (isset($_POST['seshReset'])){
-                session_unset();
-                exit();
-              }
+            	    $quantity = filter_input(INPUT_POST, 'quantity', FILTER_VALIDATE_INT);
+	            	$product = filter_input(INPUT_POST, 'prod_id', FILTER_VALIDATE_INT);
+	            	$price = filter_input(INPUT_POST, 'price', FILTER_VALIDATE_FLOAT);
 
-        	print_r($_SESSION['user']);
-
-            	if (isset($_POST['prod_id'])) {
-                	$quantity = filter_input(INPUT_POST, 'quantity', FILTER_SANITIZE_SPECIAL_CHARS);
-	            	$product = filter_input(INPUT_POST, 'prod_id', FILTER_SANITIZE_SPECIAL_CHARS);
-
-
-                	if (!isset($_SESSION['cart'])) {
-                    	$_SESSION['cart'] = array ();
-                	}
-					//If an order has already been created, add the product to the order
-                    //if (isset($_SESSION['order_created'])){
-                      // Get the order id
-                      //$ordID = getOrderID($_SESSION['user']['user_id']);
-                      // Add item call here
-                    //}
-
-                    //If an order has not been created yet, create one and add the item to the order
-                    if (!isset($_SESSION['order_created'])){
-                      $_SESSION['order_created'] = true;
-
-                      if(isset($_SESSION['user']['user_id'])){
-                        $getUserID = $_SESSION['user']['user_id'];
-                        createOrder($getUserID);
-                        //Get order ID
-                        //$ordID = getOrderID($_SESSION['user']['user_id']);
-                        //Add item call here
-                      }
-                    }
- 	            	if (array_key_exists($product, $_SESSION['cart']))
- 	            	{
- 		            	$quantity += $_SESSION['cart'][$product];
- 		            	$_SESSION['cart'][$product] = $quantity;
- 	            	}
- 	            	else
- 	            	{
- 		            	$_SESSION['cart'][$product] = $quantity;
- 	            	}
-
-
- 	            	foreach($_SESSION['cart'] as $key => $value) {
-	                	echo "The product id is $key <br>";
-	                	echo "The quantity is $value <br><hr>";
-	            	}
+            	    cartItems($quantity, $product, $price);
 	        	}
-
         ?>
+
+
+
 
 
 

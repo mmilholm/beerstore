@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once "model/db_functions.php";
+require "model/cartItems.php";
 ?>
 
 <!DOCTYPE html>
@@ -86,26 +87,29 @@ require_once "model/db_functions.php";
 		<?php
       if (isset($_POST['itemType'])){
 			  $count = 0;
-    		$names = getProdInfo($_POST['itemType']);
-    		foreach ($names as $name) {
+    		$items = getProdInfo($_POST['itemType']);
+    		foreach ($items as $item) {
     			if ($count % 3 == 0) echo '<div class="row">';
 		?>
 				<div class="col-sm-4">
 					<div class="well">
 						<form action = "" method = "post">
     						<fieldset>
-                				<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#<?php echo $name['prod_id']; ?>">
+                				<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#<?php echo $item['prod_id']; ?>">
 
-                				<?php echo $name['company_name'] . "<br>" . $name['prod_name']; ?> <br><br>
-                				<img class="img-thumbnail" style = "height:200px; width:200px;" src="<?php echo $name[prod_picture]; ?>"> <br><br> <?php if ($name['prod_package'] != null) { echo $name['prod_package'] . " --- ";} echo "$" . $name['prod_price']; ?></p>
+                				<?php echo $item['company_name'] . "<br>" . $item['prod_name']; ?>
+                				<br><br> <img class="img-thumbnail" style = "height:200px; width:200px;" src="<?php echo $item[prod_picture]; ?>">
+                				    <br><br> <?php if ($item['prod_package'] != null) { echo $item['prod_package'] . " --- ";} echo "$" . $item['prod_price']; ?></p>
 
                 				</a>
 
-                				<div id="<?php echo $name['prod_id']; ?>" class="collapse">
-                					<?php echo $name['prod_description'] . "<br><br>" ?>
+                				<div id="<?php echo $item['prod_id']; ?>" class="collapse">
+                					<?php echo $item['prod_description'] . "<br><br>" ?>
                 					Quantity:
                 					<input type="number" name="quantity" min="1" max="10">
-                					<?php require 'model/addButton.php'; ?>
+                					<input type="hidden" name="prod_id" value="<?php echo $item['prod_id']; ?>">
+                					<input type="hidden" name="price" value="<?php echo $item['prod_price']; ?>">
+                					<button class="btn btn-info" name = "addItem" type="submit"> Add </button>
             					</div>
             				</fieldset>
         				</form>
@@ -128,10 +132,22 @@ require_once "model/db_functions.php";
         <?php
             $getUserID = 0;
 
-              if (isset($_POST['seshReset'])){
-                session_unset();
-                exit();
-              }
+                if (isset($_POST['seshReset'])){
+                    session_unset();
+                    exit();
+                }
+                if (isset($_POST['addItem'])) {
+
+            	    $quantity = filter_input(INPUT_POST, 'quantity', FILTER_VALIDATE_INT);
+	            	$product = filter_input(INPUT_POST, 'prod_id', FILTER_VALIDATE_INT);
+	            	$price = filter_input(INPUT_POST, 'price', FILTER_VALIDATE_FLOAT);
+
+            	    cartItems($quantity, $product, $price);
+	        	}
+
+
+
+/*
 
         	//print_r($_SESSION['user']);
 
@@ -178,7 +194,7 @@ require_once "model/db_functions.php";
 	                	echo "The quantity is $value <br><hr>";
 	            	}
 	        	}
-
+*/
         ?>
 
 

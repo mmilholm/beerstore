@@ -44,6 +44,37 @@ function getAllNames()
 
 }
 
+//Used in index3.php checkout page
+function getAllProducts()
+{
+    global $dbc;
+
+    $query = 'SELECT * from tblProducts';
+    $statement = $dbc->prepare($query);
+    $statement->execute();
+    $items = $statement->fetchAll();
+    $statement->closeCursor();
+    return $items;
+
+}
+
+
+//Used in shopping_cart.php checkout page
+function getProduct($prod_id)
+{
+    global $dbc;
+
+    $query = 'SELECT * from tblProducts WHERE prod_id = :product';
+    $statement = $dbc->prepare($query);
+    $statement->bindValue(':product', $prod_id);
+    $statement->execute();
+    $items = $statement->fetchAll();
+    $statement->closeCursor();
+    return $items;
+
+}
+
+
 function getProdInfo($category)
 {
     $category = (int) $category;
@@ -113,6 +144,5 @@ function getUser($username, $password)
     $statement->closeCursor();
     return $result;
 }
-
 
 ?>

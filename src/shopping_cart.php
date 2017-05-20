@@ -23,6 +23,12 @@ require "model/cartItems.php";
 
     <!-- Custom CSS -->
     <link href="css/shop-homepage.css" rel="stylesheet">
+    
+    <!-- For shopping_cart.js -->
+    <script data-require="jquery" data-semver="2.1.4" src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="shopping_cart.js"></script>
+
+
 
 </head>
 
@@ -66,7 +72,6 @@ require "model/cartItems.php";
     //Iterate through the current cart session
     foreach($_SESSION['cart'] as $key => $value) {
         //Quere the DB for the info related to the prod_id
-        $count = 0;
         $product = getProduct($key);
         foreach ($product as $item) {
 ?>
@@ -84,24 +89,14 @@ require "model/cartItems.php";
 	        }
 	    }
 ?>
-
-        <input type="number" name="quantity"  id="quantity<?php echo $count ?>" value="<?php echo $quantity ?>" min="1" max="10">
-        <input type="text" id="subTotal<?php echo $count ?>" value="<?php echo $price ?>" readonly>
-        <input type="hidden" id="price<?php echo $count ?>" value="<?php echo $item['prod_price']?>">
-        <input type="hidden" id="<?php echo $count?>" value="<?php echo $count ?>">
-        <script data-require="jquery" data-semver="2.1.4" src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
-        <script src="shopping_cart.js"></script>
-
-
+	
+       
+        <input type="number" name="quantity"  id="quantity<?php echo $item['prod_id'] ?>" value="<?php echo $quantity ?>" min="1" max="10">
+        <input type="text" id="subTotal<?php echo $item['prod_id'] ?>" value="<?php echo $price ?>" readonly>
+        <input type="hidden" id="price<?php echo $item['prod_id'] ?>" value="<?php echo $item['prod_price']?>">
+        <input type="hidden" id="prod_id" value="<?php echo $item['prod_id'] ?>">
+		<script> updateSubTotal(<?php echo $item['prod_id'] ?>) </script>
 <?php
-
-    $count++;
-
-
-
-
-
-
 
 	}
 

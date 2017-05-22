@@ -2,6 +2,15 @@
 session_start();
 require_once "model/db_functions.php";
 require "model/cartItems.php";
+
+
+if (isset($_POST['update'])) {
+    header ('Location: index3.php');
+}
+
+if (isset($_POST['checkout'])) {
+    header ('Location: shopping_cart.php');
+}
 ?>
 
 <!DOCTYPE html>
@@ -23,11 +32,10 @@ require "model/cartItems.php";
 
     <!-- Custom CSS -->
     <link href="css/shop-homepage.css" rel="stylesheet">
-    
+
     <!-- For shopping_cart.js -->
     <script data-require="jquery" data-semver="2.1.4" src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
     <script src="shopping_cart.js"></script>
-
 
 
 </head>
@@ -54,7 +62,7 @@ require "model/cartItems.php";
     </div>
 
 	<div id="menubar">
-    <a href="">Home</a>  &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+    <a href="/index3.php">Home</a>  &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
     <a href="beer.php">Beer</a>  &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
     <a href="merch.php">Gifts</a>  &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
     <a href="contact.php">Contact</a>  &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
@@ -67,46 +75,73 @@ require "model/cartItems.php";
 
 <h1> Shopping Cart!!! </h1>
 <hr>
+<form action="/shopping_cart.php" method="post">
 
-<?php
-    //Iterate through the current cart session
-    foreach($_SESSION['cart'] as $key => $value) {
-        //Quere the DB for the info related to the prod_id
-        $product = getProduct($key);
-        foreach ($product as $item) {
-?>
+    <?php
 
-            <img class="img-thumbnail" style = "height:200px; width:200px;" src="<?php echo $item[prod_picture]; ?>">
-<?php       echo $item['company_name'] . " " . $item['prod_name'] . " " . $item['prod_price'];
-        }
-	    $isFirst = true;
-	    foreach($value as $val) {
-	        if ($isFirst) {
-	            $quantity = (int) $val;
-	            $isFirst = false;
-	        } else {
-	            $price = $val;
+        $cartItem = 0;
+        //Iterate through the current cart session
+        foreach($_SESSION['cart'] as $key => $value) {
+            //Quere the DB for the info related to the prod_id
+            $product = getProduct($key);
+            foreach ($product as $item) {
+    ?>
+
+                <img class="img-thumbnail" style = "height:200px; width:200px;" src="<?php echo $item[prod_picture]; ?>">
+    <?php       echo $item['company_name'] . " " . $item['prod_name'] . " " . $item['prod_price'];
+            }
+	        $isFirst = true;
+	        foreach($value as $val) {
+	            if ($isFirst) {
+	                $quantity = (int) $val;
+	                $isFirst = false;
+	            } else {
+	                $price = $val;
+	            }
 	        }
+    ?>
+
+
+            <input type="number" name="quantity<?php echo $cartItem ?>"  id="quantity<?php echo $cartItem ?>" value="<?php echo $quantity ?>" min="1" max="10">
+            <input type="text" id="subTotal<?php echo $cartItem ?>" value="<?php echo $price ?>" readonly>
+            <input type="hidden" name="price<?php echo $cartItem ?>" id="price<?php echo $cartItem ?>" value="<?php echo $item['prod_price']?>">
+            <input type="hidden" name="prod_id<?php echo $cartItem ?>" id="prod_id" value="<?php echo $item['prod_id'] ?>">
+		    <script> updateSubTotal("<?php echo $cartItem ?>") </script>
+    <?php
+            $cartItem += 1;
 	    }
-?>
-	
-       
-        <input type="number" name="quantity"  id="quantity<?php echo $item['prod_id'] ?>" value="<?php echo $quantity ?>" min="1" max="10">
-        <input type="text" id="subTotal<?php echo $item['prod_id'] ?>" value="<?php echo $price ?>" readonly>
-        <input type="hidden" id="price<?php echo $item['prod_id'] ?>" value="<?php echo $item['prod_price']?>">
-        <input type="hidden" id="prod_id" value="<?php echo $item['prod_id'] ?>">
-		<script> updateSubTotal(<?php echo $item['prod_id'] ?>) </script>
-<?php
 
-	}
+    ?>
 
-?>
+   <button name="checkout" type="submit" value""> CHECKOUT </button>
+   <button name="update" type="submit" value"">  CONTINUE SHOPPING </button>
 
 
 
 
+</form>
+
+    <?php
+        if (isset($_POST['checkout']) || isset($_POST['update'])) {
+
+            unset($_SESSION['cart']);
+
+            for($i = 0; $i < $cartItem; $i++) {
+            	$quantity = filter_input(INPUT_POST, "quantity$i", FILTER_VALIDATE_INT);
+	            $product = filter_input(INPUT_POST, "prod_id$i", FILTER_VALIDATE_INT);
+	            $price = filter_input(INPUT_POST, "price$i", FILTER_VALIDATE_FLOAT);
+
+            	cartItems($quantity, $product, $price);
+            }
+	    }
 
 
+	    print_r($_SESSION['cart']);
+
+
+
+
+        ?>
 
 
 

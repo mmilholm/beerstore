@@ -2,6 +2,14 @@
 session_start();
 require_once "model/db_functions.php";
 require "model/cartItems.php";
+
+if (isset($_POST['update'])) {
+  header ('Location: index3.php'); //Must be changed when index is renamed to just index.php
+}
+if (isset($POST['update'])){
+  header ('Location: shopping_cart.php');
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -140,57 +148,38 @@ require "model/cartItems.php";
         <div class="row">
           <h2>Checkout</h2>
           <hr>
-
-          Sub Total price: ####</br>
-          Taxes: ###<br>
-          <hr>
-          Total: ######
-          <hr>
           <form action="/shopping_cart.php" method="post">
 
-              <?php
-
-                  $cartItem = 0;
-                  //Iterate through the current cart session
-                  foreach($_SESSION['cart'] as $key => $value) {
-                      //Quere the DB for the info related to the prod_id
-                      $product = getProduct($key);
-                      foreach ($product as $item) {
-              ?>
-
-                          <img class="img-thumbnail" style = "height:200px; width:200px;" src="<?php echo $item[prod_picture]; ?>">
-              <?php       echo $item['company_name'] . " " . $item['prod_name'] . " " . $item['prod_price'];
-                      }
-          	        $isFirst = true;
-          	        foreach($value as $val) {
-          	            if ($isFirst) {
-          	                $quantity = (int) $val;
-          	                $isFirst = false;
-          	            } else {
-          	                $price = $val;
-          	            }
-          	        }
-              ?>
+          <?php
+                            echo 'Sub total price: $';
+                            $subtotal = 0.0;
+                            foreach ($_SESSION['cart'] as $product){
+                              $subtotal += $product[1];
+                            }
+                            echo $subtotal;
+                            $taxes = $subtotal * 0.07;
+                            echo '<br>';
+                            echo 'Taxes: $';
+                            echo round($taxes, 2);
+                            echo '<hr>';
+                            echo 'Total: $';
+                            $totalCost = $subtotal + $taxes;
+                            echo round($totalCost, 2);
 
 
-                      <input type="number" name="quantity<?php echo $cartItem ?>"  id="quantity<?php echo $cartItem ?>" value="<?php echo $quantity ?>" min="1" max="10">
-                      <input type="text" id="subTotal<?php echo $cartItem ?>" value="<?php echo $price ?>" readonly>
-                      <input type="hidden" name="price<?php echo $cartItem ?>" id="price<?php echo $cartItem ?>" value="<?php echo $item['prod_price']?>">
-                      <input type="hidden" name="prod_id<?php echo $cartItem ?>" id="prod_id" value="<?php echo $item['prod_id'] ?>">
-          		    <script> updateSubTotal("<?php echo $cartItem ?>") </script>
-              <?php
-                      $cartItem += 1;
-          	    }
+          ?></br></br>
 
-              ?>
+
+
 
              <button name="checkout" type="submit" value""> CHECKOUT </button>
              <button name="update" type="submit" value"">  CONTINUE SHOPPING </button>
+           </form>
 
 
 
 
-          </form>
+
 
               <?php
                   if (isset($_POST['checkout']) || isset($_POST['update'])) {
@@ -207,7 +196,7 @@ require "model/cartItems.php";
           	    }
 
 
-          	    print_r($_SESSION['cart']);
+          	    //print_r($_SESSION['cart']);
 
 
 

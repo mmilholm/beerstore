@@ -29,7 +29,7 @@ if ($env) {
 
 
 // dsn - data source name
-$dsn = "mysql:host=$host;dbname=$dbname";
+$dsn = "mysql:host=localhost;port=3306;dbname=$dbname";
     
 try {
     $dbc = new PDO($dsn, $username, $password);

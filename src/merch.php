@@ -83,17 +83,15 @@ require "model/cartItems.php";
               <button class="btn btn-info btn-lg" name = "seshReset" type="submit" value="1"  style="width: 175px;"> Reset Session </button>
             </form><br>
               <form action="" method="post">
-              <button class="btn btn-info btn-lg" name = "itemType" type="submit" value="1" style="width: 175px;"> Ale </button>
+              <button class="btn btn-info btn-lg" name = "itemType" type="submit" value="1" style="width: 175px;"> Clothes </button>
               </form><br>
               <form action="" method="post">
-              <button class="btn btn-info btn-lg" name = "itemType" type="submit" value="2" style="width: 175px;"> Lager </button>
+              <button class="btn btn-info btn-lg" name = "itemType" type="submit" value="2" style="width: 175px;"> Glassware </button>
               </form><br>
               <form action="" method="post">
-              <button class="btn btn-info btn-lg" name = "itemType" type="submit" value="3" style="width: 175px;"> Stout </button>
+              <button class="btn btn-info btn-lg" name = "itemType" type="submit" value="3" style="width: 175px;"> Accessories </button>
               </form><br>
-              <form action="" method="post">
-              <button class="btn btn-info btn-lg" name = "itemType" type="submit" value="4" style="width: 175px;"> IPA </button>
-              </form>
+
 
         </div>
 

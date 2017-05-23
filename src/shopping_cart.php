@@ -4,10 +4,15 @@ require_once "model/db_functions.php";
 require "model/cartItems.php";
 
 if (isset($_POST['update'])) {
-  header ('Location: index3.php'); //Must be changed when index is renamed to just index.php
+    header ('Location: index3.php');
 }
-if (isset($POST['update'])){
-  header ('Location: shopping_cart.php');
+
+if (isset($_POST['checkout'])) {
+    header ('Location: shopping_cart.php');
+}
+
+if (isset($_POST['empty'])) {
+    header ('Location: shopping_cart.php');
 }
 
 ?>
@@ -69,7 +74,7 @@ if (isset($POST['update'])){
 
     <div class="row" style="background-color: cyan;">
       <div class="col-md-3"></div>
-      <div class="col-md-2"><a href="index.php" style="font-size: 30px;">Home</a></div>
+      <div class="col-md-2"><a href="index3.php" style="font-size: 30px;">Home</a></div>
       <div class="col-md-2"><a href="beer.php" style="font-size: 30px;">Beer</a></div>
       <div class="col-md-2"><a href="merch.php" style="font-size: 30px;">Gifts</a></div>
       <div class="col-md-2"><a href="contact.php" style="font-size: 30px;">Contact</a></div>
@@ -86,9 +91,11 @@ if (isset($POST['update'])){
     <div class="col-xs-12 col-sm-6 col-md-9" style="border: 1px solid black;">
 
       <table class="table table-striped">
-
+		<form action="/shopping_cart.php" method="post">
         <?php
-
+		  if (!isset($_SESSION['cart'])) {
+        		echo "Your cart is empty";
+    	  } else {
             $cartItem = 0;
 
             //Iterate through the current cart session
@@ -122,14 +129,20 @@ if (isset($POST['update'])){
 
                             <br>
 
-                            Quantity:<input type="number" name="quantity" style="width: 50px;"  id="quantity<?php echo $item['prod_id'] ?>" value="<?php echo $quantity ?>" min="1" max="10">
+                            Quantity:   
+                            <!-- Quantity -->
+            				<input type="number" name="quantity<?php echo $cartItem ?>"  id="quantity<?php echo $cartItem ?>" value="<?php echo $quantity ?>" min="0" max="10">
 
-                            <input type="text" id="subTotal<?php echo $item['prod_id'] ?>" value="<?php echo $price ?>" readonly>
+           					 <!-- SubTotal -->
+            				<input type="text" id="subTotal<?php echo $cartItem ?>" value="<?php echo $price ?>" readonly>
 
-                            <input type="hidden" id="price<?php echo $item['prod_id'] ?>" value="<?php echo $item['prod_price']?>">
+            				<!-- Price of individual product (hidden) -->
+            				<input type="hidden" name="price<?php echo $cartItem ?>" id="price<?php echo $cartItem ?>" value="<?php echo $item['prod_price']?>">
 
-                            <input type="hidden" id="prod_id" value="<?php echo $item['prod_id'] ?>">
-                            <script> updateSubTotal(<?php echo $item['prod_id'] ?>) </script>
+            				<!-- The product id (hidden) -->
+           					 <input type="hidden" name="prod_id<?php echo $cartItem ?>" id="prod_id" value="<?php echo $item['prod_id'] ?>">
+		    				<script> updateSubTotal("<?php echo $cartItem ?>") </script>
+		   					 <!-- <script> updateTotal("<?php echo $cartItem ?>") </script>  -->
 
                             <br/>
                           </td>
@@ -141,7 +154,7 @@ if (isset($POST['update'])){
                         $cartItem += 1;
 
                         }
-
+					}
                         ?>
       </table>
     </div> <!-- end of first content area -->
@@ -150,7 +163,6 @@ if (isset($POST['update'])){
         <div class="row">
           <h2>Checkout</h2>
           <hr>
-          <form action="/shopping_cart.php" method="post">
 
           <?php
                             echo 'Sub total price: $';
@@ -176,6 +188,7 @@ if (isset($POST['update'])){
 
              <button name="checkout" type="submit" value""> CHECKOUT </button>
              <button name="update" type="submit" value"">  CONTINUE SHOPPING </button>
+             <button name="empty" type="submit">EMPTY CART </button>
            </form>
 
 
@@ -195,10 +208,10 @@ if (isset($POST['update'])){
 
                       	cartItems($quantity, $product, $price);
                       }
-          	    }
+          	    } elseif(isset($_POST['empty'])) {
+	        			unset($_SESSION['cart']);
+	    		}
 
-
-          	    //print_r($_SESSION['cart']);
 
 
 

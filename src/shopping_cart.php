@@ -121,6 +121,7 @@ if (isset($POST['update'])){
                             ?>
 
                             <br>
+
                             Quantity:<input type="number" name="quantity" style="width: 50px;"  id="quantity<?php echo $item['prod_id'] ?>" value="<?php echo $quantity ?>" min="1" max="10">
 
                             <input type="text" id="subTotal<?php echo $item['prod_id'] ?>" value="<?php echo $price ?>" readonly>
@@ -129,6 +130,7 @@ if (isset($POST['update'])){
 
                             <input type="hidden" id="prod_id" value="<?php echo $item['prod_id'] ?>">
                             <script> updateSubTotal(<?php echo $item['prod_id'] ?>) </script>
+
                             <br/>
                           </td>
                         </tr>

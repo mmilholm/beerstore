@@ -20,4 +20,22 @@ function cartItems ($quantity, $product, $price) {
 }
 
 
+function getNumberItems() {
+	$numItems = 0;
+	
+	if (!isset($_SESSION['cart'])) {
+		return $numItems;
+	}
+	
+	foreach($_SESSION['cart'] as $key => $value) {
+		$numItems += (int) $_SESSION['cart'][$key][0];
+	}
+	return $numItems;
+
+
+
+}
+
+
+
 ?>

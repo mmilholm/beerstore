@@ -9,6 +9,9 @@ if (isset($_POST['addItem'])) {
 
 ?>
 
+
+<?php
+/*
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -61,7 +64,12 @@ if (isset($_POST['addItem'])) {
     </div>
 
 </div>
+*/
+?>
 
+
+
+<?php require 'view/header.php'; ?>
 
 <div class="container text-center">
 	<div class="row">

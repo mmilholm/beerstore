@@ -16,7 +16,8 @@ if (isset($_POST['empty'])) {
 }
 
 ?>
-
+<?php
+/*
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -85,6 +86,11 @@ if (isset($_POST['empty'])) {
 
 </div>
 
+*/
+?>
+
+<?php require 'view/header.php'; ?>
+
 <div id="container-fluid">
   <div class="row">
 
@@ -129,7 +135,7 @@ if (isset($_POST['empty'])) {
 
                             <br>
 
-                            Quantity:   
+                            Quantity:
                             <!-- Quantity -->
             				<input type="number" name="quantity<?php echo $cartItem ?>"  id="quantity<?php echo $cartItem ?>" value="<?php echo $quantity ?>" min="0" max="10">
 

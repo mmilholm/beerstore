@@ -4,6 +4,9 @@ require_once "model/db_functions.php";
 require "model/cartItems.php";
 ?>
 
+<?php
+/*
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -71,6 +74,11 @@ require "model/cartItems.php";
     </div>
 
 </div>
+
+*/
+?>
+
+<?php require 'view/header.php'; ?>
 
 <div id="container-fluid">
   <div class="row">

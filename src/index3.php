@@ -2,6 +2,11 @@
 session_start();
 require_once "model/db_functions.php";
 require "model/cartItems.php";
+
+if (isset($_POST['addItem'])) {
+    header ('Location: index3.php');
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -43,7 +48,7 @@ require "model/cartItems.php";
 			echo '<a href="login.php?origin='. $current_url . '"> Hello, Sign in </a>';
 		}
 		?>
-	   <a href="shopping_cart.php"> Cart(#) </a>
+	    <a href="shopping_cart.php" class = "btn"> <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span><span style= padding:10px;><?php echo getNumberItems() ?></span> </a>
     </div>
 
 	<div id="menubar">

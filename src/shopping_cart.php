@@ -65,7 +65,7 @@ if (isset($_POST['empty'])) {
       echo '<a href="login.php?origin='. $current_url . '"> Hello, Sign in </a>';
     }
     ?>
-     <a href="shopping_cart.php"> Cart(#) </a>
+	<a href="shopping_cart.php" class = "btn" role="button"> <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"  style= padding:10px;></span><span class="badge"><?php echo getNumberItems() ?></span> </a>
     </div>
 
   </div>

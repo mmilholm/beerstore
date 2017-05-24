@@ -27,8 +27,8 @@ function getNumberItems() {
 		return $numItems;
 	}
 	
-	foreach($_SESSION['cart'] as $key => $value) {
-		$numItems += (int) $_SESSION['cart'][$key][0];
+	foreach(array_keys($_SESSION['cart']) as $key) {
+			$numItems += (int) $_SESSION['cart'][$key][0];
 	}
 	return $numItems;
 

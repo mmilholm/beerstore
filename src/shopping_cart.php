@@ -120,23 +120,9 @@ if (isset($_POST['empty'])) {
              <button name="update" type="submit" value"">  CONTINUE SHOPPING </button>
              <button name="empty" type="submit">EMPTY CART </button>
            </form>
-			
 			<!-- Stripe Button Code -->
-			<?php require_once('./config.php');?>
-
-			<form action="charge.php" method="post">
-  				<input type="hidden" name="amount" value="<?php echo $total * 100; ?>" />
-  
-  				<script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-          			data-key="<?php echo $stripe['publishable_key']; ?>"
-          			data-description="Payment Checkout"
-          			data-amount="<?php echo $total * 100; ?>"
-          			data-locale="auto"
-          			data-currency="cad"></script>
-	
-			</form>
-
-
+			<?php require 'checkout.php'; ?>
+			
 
 
 

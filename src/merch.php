@@ -1,7 +1,20 @@
+
 <?php
 session_start();
 require_once "model/db_functions.php";
 require "model/cartItems.php";
+
+if (isset($_POST['addItem']) && isset($_GET['itemType'])) {
+	if ($_GET['itemType'] == 1) {
+		header('Location: beer.php?itemType=1');
+	} elseif ($_GET['itemType'] == 2) {
+		header('Location: beer.php?itemType=2');
+	} elseif ($_GET['itemType'] == 3) {
+		header('Location: beer.php?itemType=3');
+	} elseif ($_GET['itemType'] == 4) {
+		header('Location: beer.php?itemType=4');
+	}
+}
 ?>
 
 <!DOCTYPE html>
@@ -13,64 +26,55 @@ require "model/cartItems.php";
     <meta name="description" content="">
     <meta name="author" content="">
 
-	<link rel="stylesheet" type="text/css" href="css/basecss.css">
-
 	<title>the beer shoppe - Camosun ICS Year One Project</title>
+
+
+	<!-- General CSS scripts
+	<link rel="stylesheet" type="text/css" href="css/basecss.css">  -->
 
 	<!-- Bootstrap Core CSS -->
     <!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
     <!-- Custom CSS -->
-    <link href="css/shop-homepage.css" rel="stylesheet">
+    <link href="../css/shop-homepage.css" rel="stylesheet">
 
     <!-- For shopping_cart.js -->
     <script data-require="jquery" data-semver="2.1.4" src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
-    <script src="shopping_cart.js"></script>
+    <script src="../shopping_cart.js"></script>
 
 
+    <!-- Link for font -->
+    <link href="https://fonts.googleapis.com/css?family=Share" rel="stylesheet">
 
+	<style>
+
+		body {
+			font-family: 'Share', cursive;
+		}
+
+		.navbar-right > li > a {
+  			padding-top: 0px;
+  			padding-bottom: 0px;
+ 		}
+
+
+		.navbar {
+ 			background: aqua;
+   			position: relative;
+    		margin-bottom: 0;
+    		min-height:28px;
+		}
+
+
+	</style>
 </head>
+
+<!-- The stript for the header -->
+<?php require 'view/header.php'; ?>
 
 <body>
 
-
-<div class="container-fluid">
-  <div class="row" style="height: 35px;">
-  Some image can go here<br><br><br>
-  <div id="login_div">
-    <?php
-
-    $current_url = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-
-    if (isset ($_SESSION['user']) && isset($_SESSION['user']['user_id']))
-    {
-      echo 'Hello, ' . $_SESSION['user']['first_name']. ' ' .$_SESSION['user']['last_name']. ' <a href="logout.php?origin=' . $current_url . '">Log out</a>';
-    }
-    else
-    {
-      echo '<a href="login.php?origin='. $current_url . '"> Hello, Sign in </a>';
-    }
-    ?>
-     <a href="shopping_cart.php"> Cart(#) </a>
-    </div>
-
-  </div>
-  </div>
-<div id="container-fluid"> <!-- whole page width-->
-
-    <div class="row" style="background-color: cyan;">
-      <div class="col-md-3"></div>
-      <div class="col-md-2"><a href="index.php" style="font-size: 30px;">Home</a></div>
-      <div class="col-md-2"><a href="beer.php" style="font-size: 30px;">Beer</a></div>
-      <div class="col-md-2"><a href="merch.php" style="font-size: 30px;">Gifts</a></div>
-      <div class="col-md-2"><a href="contact.php" style="font-size: 30px;">Contact</a></div>
-      <div class="col-md-2"></div>
-      <div class="col-md-2"></div>
-
-    </div>
-
-</div>
 
 <div id="container-fluid">
   <div class="row">
@@ -107,7 +111,7 @@ require "model/cartItems.php";
       			if ($count % 3 == 0) echo '<div class="row">';
   		?>
   				<div class="col-sm-4">
-  					<div class="well">
+  					<div class="well text-center">
   						<form action = "" method = "post">
       						<fieldset>
                   				<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#<?php echo $item['prod_id']; ?>">

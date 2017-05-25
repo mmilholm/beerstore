@@ -2,83 +2,24 @@
 session_start();
 require_once "model/db_functions.php";
 require "model/cartItems.php";
+
+if (isset($_POST['addItem']) && isset($_GET['itemType'])) {
+	if ($_GET['itemType'] == 1) {
+		header('Location: beer.php?itemType=1');
+	} elseif ($_GET['itemType'] == 2) {
+		header('Location: beer.php?itemType=2');
+	} elseif ($_GET['itemType'] == 3) {
+		header('Location: beer.php?itemType=3');
+	} elseif ($_GET['itemType'] == 4) {
+		header('Location: beer.php?itemType=4');
+	}
+}
 ?>
 
-<?php
-/*
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-	<link rel="stylesheet" type="text/css" href="css/basecss.css">
-
-	<title>the beer shoppe - Camosun ICS Year One Project</title>
-
-	<!-- Bootstrap Core CSS -->
-    <!-- Latest compiled and minified CSS -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
-    <!-- Custom CSS -->
-    <link href="css/shop-homepage.css" rel="stylesheet">
-
-    <!-- For shopping_cart.js -->
-    <script data-require="jquery" data-semver="2.1.4" src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
-    <script src="shopping_cart.js"></script>
-
-
-
-</head>
-
-<body>
-
-
-<div class="container-fluid">
-  <div class="row" style="height: 35px;">
-  Some image can go here<br><br><br>
-  <div id="login_div">
-    <?php
-
-    $current_url = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-
-    if (isset ($_SESSION['user']) && isset($_SESSION['user']['user_id']))
-    {
-      echo 'Hello, ' . $_SESSION['user']['first_name']. ' ' .$_SESSION['user']['last_name']. ' <a href="logout.php?origin=' . $current_url . '">Log out</a>';
-    }
-    else
-    {
-      echo '<a href="login.php?origin='. $current_url . '"> Hello, Sign in </a>';
-    }
-    ?>
-     <a href="shopping_cart.php"> Cart(#) </a>
-    </div>
-
-  </div>
-  </div>
-<div id="container-fluid"> <!-- whole page width-->
-
-    <div class="row" style="background-color: cyan;">
-      <div class="col-md-3"></div>
-      <div class="col-md-2"><a href="index.php" style="font-size: 30px;">Home</a></div>
-      <div class="col-md-2"><a href="beer.php" style="font-size: 30px;">Beer</a></div>
-      <div class="col-md-2"><a href="merch.php" style="font-size: 30px;">Gifts</a></div>
-      <div class="col-md-2"><a href="contact.php" style="font-size: 30px;">Contact</a></div>
-      <div class="col-md-2"></div>
-      <div class="col-md-2"></div>
-
-    </div>
-
-</div>
-
-*/
-?>
-
+<!-- The stript for the header -->
 <?php require 'view/header.php'; ?>
+
+
 
 <div id="container-fluid">
   <div class="row">
@@ -90,17 +31,17 @@ require "model/cartItems.php";
               <form action="" method="post">
               <button class="btn btn-info btn-lg" name = "seshReset" type="submit" value="1"  style="width: 175px;"> Reset Session </button>
             </form><br>
-              <form action="" method="post">
+              <form action="" method="get">
               <button class="btn btn-info btn-lg" name = "itemType" type="submit" value="1" style="width: 175px;"> Ale </button>
               </form><br>
-              <form action="" method="post">
+              <form action="" method="get">
               <button class="btn btn-info btn-lg" name = "itemType" type="submit" value="2" style="width: 175px;"> Lager </button>
               </form><br>
-              <form action="" method="post">
+              <form action="" method="get">
               <button class="btn btn-info btn-lg" name = "itemType" type="submit" value="3" style="width: 175px;"> Stout </button>
               </form><br>
-              <form action="" method="post">
-              <button class="btn btn-info btn-lg" name = "itemType" type="submit" value="3" style="width: 175px;"> IPA </button>
+              <form action="" method="get">
+              <button class="btn btn-info btn-lg" name = "itemType" type="submit" value="4" style="width: 175px;"> IPA </button>
               </form>
 
 
@@ -111,14 +52,14 @@ require "model/cartItems.php";
 
     <div class="col-xs-12 col-sm-6 col-md-8" style="border: 1px solid black;">
       <?php
-        if (isset($_POST['itemType'])){
+        if (isset($_GET['itemType'])){
   			  $count = 0;
-      		$items = getProdInfo($_POST['itemType']);
+      		$items = getProdInfo($_GET['itemType']);
       		foreach ($items as $item) {
       			if ($count % 3 == 0) echo '<div class="row">';
   		?>
   				<div class="col-sm-4">
-  					<div class="well">
+  					<div class="well text-center">
   						<form action = "" method = "post">
       						<fieldset>
                   				<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#<?php echo $item['prod_id']; ?>">

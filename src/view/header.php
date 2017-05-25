@@ -34,6 +34,7 @@ function signIn ()
     			<li><a href="../shopping_cart.php"> Checkout <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"  style= padding-right:5px;></span><span class="badge"><?php echo getNumberItems() ?> Items</span> </a></li>
     			<li class="dropdown"><?php echo signIn() ?>
     				<ul class="dropdown-menu">
+              <li> <a href="../user.php"></span>Account</a></li>
           				<li> <a href="../logout.php?origin=<?php echo "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]" ?>"><span class="glyphicon glyphicon-user"></span>Log out</a></li>
        				</ul>
     			</li>

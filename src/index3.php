@@ -3,17 +3,50 @@ session_start();
 require_once "model/db_functions.php";
 require "model/cartItems.php";
 
-if (isset($_POST['addItem'])) {
-    header ('Location: index3.php');
+if (isset($_POST['addItem'])) {	
+    $quantity = filter_input(INPUT_POST, 'quantity', FILTER_VALIDATE_INT);
+    $product = unserialize($_POST['product_item']);
+    cartItems( unserialize($_POST['product_item']), $quantity); 
 }
+       
 
 ?>
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-<!-- The stript for the header -->
-<?php require 'view/header.php'; ?>
+	<title>the beer shoppe - Camosun ICS Year One Project</title>
 
 
+	<!-- General CSS scripts
+	<link rel="stylesheet" type="text/css" href="css/basecss.css">  -->
+
+	<!-- Bootstrap Core CSS -->
+    <!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link href="../css/shop-homepage.css" rel="stylesheet">
+
+    <!-- For shopping_cart.js -->
+    <script data-require="jquery" data-semver="2.1.4" src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="../shopping_cart.js"></script>
+
+
+    <!-- Link for font -->
+    <link href="https://fonts.googleapis.com/css?family=Share" rel="stylesheet">
+
+	
+</head>
+
+
+<body>
 
 
 <div class="container text-center">
@@ -33,7 +66,7 @@ if (isset($_POST['addItem'])) {
 		<?php
 
 			$count = 0;
-    		$items = getAllProducts();
+    		$items = getAllProducts(); 	
     		foreach ($items as $item) {
     			if ($count % 3 == 0) echo '<div class="row">';
 		?>
@@ -52,9 +85,12 @@ if (isset($_POST['addItem'])) {
                 				<div id="<?php echo $item['prod_id']; ?>" class="collapse">
                 					<?php echo $item['prod_description'] . "<br><br>" ?>
                 					Quantity:
-                					<input type="number" name="quantity" min="1" max="10">
-                					<input type="hidden" name="prod_id" value="<?php echo $item['prod_id']; ?>">
-                					<input type="hidden" name="price" value="<?php echo $item['prod_price']; ?>">
+                					<?php
+                						$serialized_item = serialize($item);
+                						$encoded=htmlentities($serialized_item);
+ 										echo '<input type="hidden" name="product_item" value="'.$encoded.'">';
+                					?>
+                					<input type="number" name="quantity" min="1" max="10">                					         			
                 					<button class="btn btn-info" name = "addItem" type="submit"> Add </button>
             					</div>
             				</fieldset>
@@ -72,16 +108,7 @@ if (isset($_POST['addItem'])) {
 	</div>
 </div>
 
-        <?php
-            	if (isset($_POST['addItem'])) {
-
-            	    $quantity = filter_input(INPUT_POST, 'quantity', FILTER_VALIDATE_INT);
-	            	$product = filter_input(INPUT_POST, 'prod_id', FILTER_VALIDATE_INT);
-	            	$price = filter_input(INPUT_POST, 'price', FILTER_VALIDATE_FLOAT);
-
-            	    cartItems($quantity, $product, $price);
-	        	}
-        ?>
+       
 
 
 

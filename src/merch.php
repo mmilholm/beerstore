@@ -101,7 +101,7 @@ if (isset($_POST['addItem']) && isset($_GET['itemType'])) {
 
     </div>
   </div>
-
+ 
     <div class="col-xs-12 col-sm-6 col-md-8" style="border: 1px solid black;">
       <?php
         if (isset($_POST['itemType'])){

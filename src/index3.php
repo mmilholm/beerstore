@@ -66,7 +66,7 @@ if (isset($_POST['addItem']) && isset($_GET['itemType'])) {
     		min-height:28px;
 		}
 
-
+ 
 	</style>
 </head>
 

@@ -1,7 +1,7 @@
 <?php
 session_start();
-require_once "model/db_functions.php";
-require "model/cartItems.php";
+ require_once "model/db_functions.php";
+ require "model/cartItems.php";
 
 if (isset($_POST['update'])) {
     header ('Location: index3.php');
@@ -16,8 +16,40 @@ if (isset($_POST['empty'])) {
 }
 
 ?>
-<?php
-/*
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+	<title>the beer shoppe - Camosun ICS Year One Project</title>
+
+
+	<!-- General CSS scripts
+	<link rel="stylesheet" type="text/css" href="css/basecss.css">  -->
+
+	<!-- Bootstrap Core CSS -->
+    <!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link href="../css/shop-homepage.css" rel="stylesheet">
+
+    <!-- For shopping_cart.js -->
+    <script data-require="jquery" data-semver="2.1.4" src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="../shopping_cart.js"></script>
+    <!-- Link for font -->
+    <link href="https://fonts.googleapis.com/css?family=Share" rel="stylesheet">
+
+	
+</head>
+
+
+<body>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -49,123 +81,26 @@ if (isset($_POST['empty'])) {
 <body>
 
 
-<div class="container-fluid">
-  <div class="row" style="height: 35px;">
-  Some image can go here<br><br><br>
-  <div id="login_div">
-    <?php
-
-    $current_url = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-
-    if (isset ($_SESSION['user']) && isset($_SESSION['user']['user_id']))
-    {
-      echo 'Hello, ' . $_SESSION['user']['first_name']. ' ' .$_SESSION['user']['last_name']. ' <a href="logout.php?origin=' . $current_url . '">Log out</a>';
-    }
-    else
-    {
-      echo '<a href="login.php?origin='. $current_url . '"> Hello, Sign in </a>';
-    }
-    ?>
-	<a href="shopping_cart.php" class = "btn" role="button"> <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"  style= padding:10px;></span><span class="badge"><?php echo getNumberItems() ?></span> </a>
-    </div>
-
-  </div>
-  </div>
-<div id="container-fluid"> <!-- whole page width-->
-
-    <div class="row" style="background-color: cyan;">
-      <div class="col-md-3"></div>
-      <div class="col-md-2"><a href="index3.php" style="font-size: 30px;">Home</a></div>
-      <div class="col-md-2"><a href="beer.php" style="font-size: 30px;">Beer</a></div>
-      <div class="col-md-2"><a href="merch.php" style="font-size: 30px;">Gifts</a></div>
-      <div class="col-md-2"><a href="contact.php" style="font-size: 30px;">Contact</a></div>
-      <div class="col-md-2"></div>
-      <div class="col-md-2"></div>
-
-    </div>
-
-</div>
-
-*/
-?>
-
-<?php require 'view/header.php'; ?>
+ <?php require 'view/header.php'; ?> 
 
 <div id="container-fluid">
-  <div class="row">
-
-    <div class="col-xs-12 col-sm-6 col-md-9" style="border: 1px solid black;">
-
-      <table class="table table-striped">
-		<form action="/shopping_cart.php" method="post">
+    <div class="col-md-12 col-sm-12" style="border: 1px solid red;">
         <?php
-		  if (!isset($_SESSION['cart'])) {
+		  if (!isset($_SESSION['cart'])) 
+		  {
         		echo "Your cart is empty";
-    	  } else {
-            $cartItem = 0;
+    	  } 
+    	  else 
+    	  {
+	            $cartItem = 0;
 
-            //Iterate through the current cart session
-            foreach($_SESSION['cart'] as $key => $value) {
-                //Quere the DB for the info related to the prod_id
-                $product = getProduct($key);
-
-                foreach ($product as $item) {
-                  ?>
-
-                        <tr>
-                          <td>
-                            <img class="img-thumbnail" style = "height:100px; width:100px;" src="<?php echo $item[prod_picture]; ?>">
-                          </td>
-
-                          <td>
-
-                            <?php       echo $item['company_name'] . "<br> " . $item['prod_name'] . "<br> " . $item['prod_price'];
-
-                            }
-                              $isFirst = true;
-                              foreach($value as $val) {
-                                if ($isFirst) {
-                                  $quantity = (int) $val;
-                                  $isFirst = false;
-                                } else {
-                                  $price = $val;
-                                }
-                              }
-                            ?>
-
-                            <br>
-
-                            Quantity:
-                            <!-- Quantity -->
-            				<input type="number" name="quantity<?php echo $cartItem ?>"  id="quantity<?php echo $cartItem ?>" value="<?php echo $quantity ?>" min="0" max="10">
-
-           					 <!-- SubTotal -->
-            				<input type="text" id="subTotal<?php echo $cartItem ?>" value="<?php echo $price ?>" readonly>
-
-            				<!-- Price of individual product (hidden) -->
-            				<input type="hidden" name="price<?php echo $cartItem ?>" id="price<?php echo $cartItem ?>" value="<?php echo $item['prod_price']?>">
-
-            				<!-- The product id (hidden) -->
-           					 <input type="hidden" name="prod_id<?php echo $cartItem ?>" id="prod_id" value="<?php echo $item['prod_id'] ?>">
-		    				<script> updateSubTotal("<?php echo $cartItem ?>") </script>
-		   					 <!-- <script> updateTotal("<?php echo $cartItem ?>") </script>  -->
-
-                            <br/>
-                          </td>
-                        </tr>
-
-
-
-                        <?php
-                        $cartItem += 1;
-
-                        }
-					}
-                        ?>
-      </table>
-    </div> <!-- end of first content area -->
-
-     <div class="col-xs-12 col-sm-6 col-md-3" style="border: 1px solid black;">
+	            //Iterate through the current cart session
+	            foreach($_SESSION['cart'] as $key => $item) 
+	            {
+					printCartItem($item);
+	            }
+		  }
+        ?>
         <div class="row">
           <h2>Checkout</h2>
           <hr>
@@ -185,24 +120,11 @@ if (isset($_POST['empty'])) {
                             echo 'Total: $';
                             $totalCost = $subtotal + $taxes;
                             echo round($totalCost, 2);
-
-
-          ?></br></br>
-
-
-
-
+          ?></br>
              <button name="checkout" type="submit" value""> CHECKOUT </button>
              <button name="update" type="submit" value"">  CONTINUE SHOPPING </button>
              <button name="empty" type="submit">EMPTY CART </button>
-           </form>
-
-
-
-
-
-
-              <?php
+             <?php
                   if (isset($_POST['checkout']) || isset($_POST['update'])) {
 
                       unset($_SESSION['cart']);
@@ -218,31 +140,58 @@ if (isset($_POST['empty'])) {
 	        			unset($_SESSION['cart']);
 	    		}
 
-
-
-
-
                   ?>
 
         </div>
 
-      </div> <!-- end of second content area -->
+  
 
       </div> <!-- closes single body row -->
-    </div> <!-- closes body container-fluid -->
-
-
-  </div>
+    </div>
+</div> <!-- closes body container-fluid -->
 
 
 
-<div id="container-fluid" style="border: 1px solid black;height:50px;">
-footer
+<div id="popover" style="display: none">
+	<a class="btn btn-success" href="#"><span class="glyphicon glyphicon-plus" ></span></a>
+	<a class="btn btn-warning" href="#"><span class="glyphicon glyphicon-minus"></span></a>
+	<a class="btn btn-danger" href="#"><span class="glyphicon glyphicon-trash"></span></a>
 </div>
+<script language="javascript" type="text/javascript" >	
+	$(function() {
+	var pop = $('.popbtn');
+	var row = $('.row:not(:first):not(:last)');
 
 
+	pop.popover({
+		trigger: 'manual',
+		html: true,
+		container: 'body',
+		placement: 'bottom',
+		animation: false,
+		content: function() {
+			return $('#popover').html();
+		}
+	});
 
 
+	pop.on('click', function(e) {
+		pop.popover('toggle');
+		pop.not(this).popover('hide');
+	});
+
+	$(window).on('resize', function() {
+		pop.popover('hide');
+	});
+
+	row.on('touchend', function(e) {
+		$(this).find('.popbtn').popover('toggle');
+		row.not(this).find('.popbtn').popover('hide');
+		return false;
+	});
+
+});
+</script>
 <!-- jQuery -->
 <script src="js/jquery.js"></script>
 

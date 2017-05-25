@@ -1,18 +1,15 @@
-
 <?php
 session_start();
 require_once "model/db_functions.php";
 require "model/cartItems.php";
 
 if (isset($_POST['addItem']) && isset($_GET['itemType'])) {
-	if ($_GET['itemType'] == 1) {
-		header('Location: beer.php?itemType=1');
-	} elseif ($_GET['itemType'] == 2) {
-		header('Location: beer.php?itemType=2');
-	} elseif ($_GET['itemType'] == 3) {
-		header('Location: beer.php?itemType=3');
-	} elseif ($_GET['itemType'] == 4) {
-		header('Location: beer.php?itemType=4');
+	if ($_GET['itemType'] == 5) {
+		header('Location: merch.php?itemType=5');
+	} elseif ($_GET['itemType'] == 6) {
+		header('Location: merch.php?itemType=6');
+	} elseif ($_GET['itemType'] == 7) {
+		header('Location: merch.php?itemType=7');
 	}
 }
 ?>
@@ -73,7 +70,6 @@ if (isset($_POST['addItem']) && isset($_GET['itemType'])) {
 <!-- The stript for the header -->
 <?php require 'view/header.php'; ?>
 
-<body>
 
 
 <div id="container-fluid">
@@ -86,27 +82,24 @@ if (isset($_POST['addItem']) && isset($_GET['itemType'])) {
               <form action="" method="post">
               <button class="btn btn-info btn-lg" name = "seshReset" type="submit" value="1"  style="width: 175px;"> Reset Session </button>
             </form><br>
-              <form action="" method="post">
-              <button class="btn btn-info btn-lg" name = "itemType" type="submit" value="5" style="width: 175px;"> Clothes </button>
+              <form action="" method="get">
+              <button class="btn btn-info btn-lg" name = "itemType" type="submit" value="5" style="width: 175px;"> Clothing </button>
               </form><br>
-              <form action="" method="post">
+              <form action="" method="get">
               <button class="btn btn-info btn-lg" name = "itemType" type="submit" value="6" style="width: 175px;"> Glassware </button>
               </form><br>
-              <form action="" method="post">
+              <form action="" method="get">
               <button class="btn btn-info btn-lg" name = "itemType" type="submit" value="7" style="width: 175px;"> Accessories </button>
-              </form><br>
-
-
         </div>
 
     </div>
   </div>
- 
+
     <div class="col-xs-12 col-sm-6 col-md-8" style="border: 1px solid black;">
       <?php
-        if (isset($_POST['itemType'])){
+        if (isset($_GET['itemType'])){
   			  $count = 0;
-      		$items = getProdInfo($_POST['itemType']);
+      		$items = getProdInfo($_GET['itemType']);
       		foreach ($items as $item) {
       			if ($count % 3 == 0) echo '<div class="row">';
   		?>

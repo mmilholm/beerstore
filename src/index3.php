@@ -10,66 +10,11 @@ if (isset($_POST['addItem'])) {
 ?>
 
 
-<?php
-/*
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-	<link rel="stylesheet" type="text/css" href="css/basecss.css">
-
-	<title>the beer shoppe - Camosun ICS Year One Project</title>
-
-	<!-- Bootstrap Core CSS -->
-    <!-- Latest compiled and minified CSS -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
-    <!-- Custom CSS -->
-    <link href="css/shop-homepage.css" rel="stylesheet">
-</head>
-
-<body>
-
-
-<div id="header_div">
-	<div id="login_div">
-		<?php
-
-		$current_url = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-
-		if (isset ($_SESSION['user']) && isset($_SESSION['user']['user_id']))
-		{
-			echo 'Hello, ' . $_SESSION['user']['first_name']. ' ' .$_SESSION['user']['last_name']. ' <a href="logout.php?origin=' . $current_url . '">Log out</a>';
-		}
-		else
-		{
-			echo '<a href="login.php?origin='. $current_url . '"> Hello, Sign in </a>';
-		}
-		?>
-	    <a href="shopping_cart.php" class = "btn"> <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span><span style= padding:10px;><?php echo getNumberItems() ?></span> </a>
-    </div>
-
-	<div id="menubar">
-    <a href="">Home</a>  &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-    <a href="beer.php">Beer</a>  &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-    <a href="merch.php">Gifts</a>  &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-    <a href="contact.php">Contact</a>  &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-
-
-    </div>
-
-</div>
-*/
-?>
-
-
-
+<!-- The stript for the header -->
 <?php require 'view/header.php'; ?>
+
+
+
 
 <div class="container text-center">
 	<div class="row">

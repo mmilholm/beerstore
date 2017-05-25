@@ -4,17 +4,6 @@ session_start();
 require_once "model/db_functions.php";
 require "model/cartItems.php";
 
-if (isset($_POST['addItem']) && isset($_GET['itemType'])) {
-	if ($_GET['itemType'] == 1) {
-		header('Location: beer.php?itemType=1');
-	} elseif ($_GET['itemType'] == 2) {
-		header('Location: beer.php?itemType=2');
-	} elseif ($_GET['itemType'] == 3) {
-		header('Location: beer.php?itemType=3');
-	} elseif ($_GET['itemType'] == 4) {
-		header('Location: beer.php?itemType=4');
-	}
-}
 ?>
 
 <!DOCTYPE html>
@@ -66,7 +55,7 @@ if (isset($_POST['addItem']) && isset($_GET['itemType'])) {
     		min-height:28px;
 		}
 
- 
+
 	</style>
 </head>
 

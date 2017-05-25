@@ -61,21 +61,21 @@ function signIn ()
 		body {
 			font-family: 'Share', cursive;
 		}
-		
+
 		.navbar-right > li > a {
   			padding-top: 0px;
   			padding-bottom: 0px;
  		}
- 		
-		
+
+
 		.navbar {
  			background: aqua;
    			position: relative;
     		margin-bottom: 0;
     		min-height:28px;
 		}
-		
-		
+
+
 	</style>
 </head>
 
@@ -83,11 +83,12 @@ function signIn ()
 <body>
 
 <nav class="navbar" id="topBar">
-	<div class="container-fluid">
+	<div class="container-fluid" style="height: 125px;">
 			<ul class="nav navbar-nav navbar-right">
     			<li><a href="../shopping_cart.php"> Checkout <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"  style= padding-right:5px;></span><span class="badge"><?php echo getNumberItems() ?> Items</span> </a></li>
     			<li class="dropdown"><?php echo signIn() ?>
     				<ul class="dropdown-menu">
+              <li> <a href="../user.php"></span>Account</a></li>
           				<li> <a href="../logout.php?origin=<?php echo "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]" ?>"><span class="glyphicon glyphicon-user"></span>Log out</a></li>
        				</ul>
     			</li>
@@ -134,7 +135,7 @@ function signIn ()
 */?>
 
 
-<div id="container-fluid"> 
+<div id="container-fluid">
 
     <div class="row" style="background-color: cyan;">
       <div class="col-md-3"></div>
@@ -147,4 +148,4 @@ function signIn ()
 
     </div>
 
-</div> 
+</div>

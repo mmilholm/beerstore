@@ -22,6 +22,7 @@ function storeName($firstName, $lastName)
     $statement->bindValue(':lastName', $lastName);
     $statement->execute();
     $statement->closeCursor();
+
 }
 
 /**
@@ -47,12 +48,14 @@ function getAllNames()
 function getAllProducts()
 {
     global $dbc;
+
     $query = 'SELECT * from tblProducts';
     $statement = $dbc->prepare($query);
     $statement->execute();
     $items = $statement->fetchAll();
     $statement->closeCursor();
     return $items;
+
 }
 
 
@@ -141,69 +144,5 @@ function getUser($username, $password)
     $statement->closeCursor();
     return $result;
 }
-
-// function cartSync()
-// {
-//   global $dbc;
-//   $query = '';
-
-//     if(isset($_SESSION['user']) && isset($_SESSION['user']['user_id']))
-//     {
-//         if(isset($_SESSION['cart']))
-//         {
-//             reNewUnpayedOrder($_SESSION['user']['user_id']);
-
-
-//               $query = 'INSERT INTO tblOrders( user_id, order_date, payed, order_total)
-//                                       Values(:user_id,NOW() - INTERVAL 1 DAY, 0, );' ;
-//               $statement = $dbc->prepare($query);
-//               $statement->bindValue(':user_id', $userID);   
-//               $statement->execute();    
-//               $statement->closeCursor();
-
-//             foreach($_SESSION['cart'] as $key => $value)
-//             {
-//                   $query = 'INSERT INTO tblOrders_Products FROM tblOrders_Products 
-//                     JOIN tblOrders ON  tblOrders.order_id = tblOrders_Products.order_id 
-//                     WHERE tblOrders.user_id = :user_id and tblOrders.payed = 0' ;
-
-//             }
-
-//         }
-
-//     }
-// }
-
-
-// function getCartTotal()
-// {
-//   $total = 0;
-//   if(isset($_SESSION['cart'])
-//   {
-//       foreach ($_SESSION['cart'] as $key1 => $productOrder) 
-//       {      
-//         total += $productOrder['price'] * $productOrder['quantity'] 
-//       }  
-//   }
-// }
-
-// function reNewUnpayedOrder($userID)
-// {
-//     global $dbc;
-//     $query = 'DELETE tblOrders_Products FROM tblOrders
-//               JOIN tblOrders_Products ON tblOrders.order_id = tblOrders_Products.order_id
-//               where tblOrders.user_id = :user_id and tblOrders.payed = 0' ;
-//     $statement = $dbc->prepare($query);
-//     $statement->bindValue(':user_id', $userID);   
-//     $statement->execute();    
-//     $statement->closeCursor();
-
-//     $query = 'DELETE tblOrders FROM tblOrders              
-//               where user_id = :user_id and payed = 0' ;
-//     $statement = $dbc->prepare($query);
-//     $statement->bindValue(':user_id', $userID);   
-//     $statement->execute();    
-//     $statement->closeCursor();
-// }
 
 ?>

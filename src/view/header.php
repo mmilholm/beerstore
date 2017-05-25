@@ -8,13 +8,15 @@
 //require_once "../model/db_functions.php";
 //require "../model/cartItems.php";
 
+
+
 function signIn ()
 {
     $current_url = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 
     if (isset ($_SESSION['user']) && isset($_SESSION['user']['user_id']))
     {
-      echo '<li style=padding-top:5px;>Hello, ' . $_SESSION['user']['first_name']. ' ' .$_SESSION['user']['last_name']. '</li> <li> <a href="../logout.php?origin=' . $current_url . '"><span class="glyphicon glyphicon-user"></span>Log out</a></li>';
+      echo '<a class="dropdown-toggle" data-toggle="dropdown" href="#">Hello, ' . $_SESSION['user']['first_name']. ' ' .$_SESSION['user']['last_name']. '<span class="caret"></span></a>';
     }
     else
     {
@@ -59,60 +61,80 @@ function signIn ()
 		body {
 			font-family: 'Share', cursive;
 		}
-
+		
 		.navbar-right > li > a {
   			padding-top: 0px;
   			padding-bottom: 0px;
-  			line-height: 28px;
  		}
-		 .navbar {
- 			background: aqua;
-     	    min-height:28px;
-     	    height: 28px;
- 		}
- 		.navbar-collapse.collapse {
-			display: block;
-		}
-
-		.navbar-nav>li, .navbar-nav {
-			float: left;
-		}
-
-
-		.navbar-nav.navbar-right:last-child {
-			margin-right: -15px
-		}
-
-		.navbar-right {
-			float: right;
-		}
-
+ 		
+		
 		.navbar {
+ 			background: aqua;
    			position: relative;
     		margin-bottom: 0;
+    		min-height:28px;
 		}
-
-
-
+		
+		
 	</style>
 </head>
 
 
 <body>
 
-<nav class="navbar">
+<nav class="navbar" id="topBar">
 	<div class="container-fluid">
 			<ul class="nav navbar-nav navbar-right">
     			<li><a href="../shopping_cart.php"> Checkout <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"  style= padding-right:5px;></span><span class="badge"><?php echo getNumberItems() ?> Items</span> </a></li>
-    			<li><?php echo signIn() ?></li>
+    			<li class="dropdown"><?php echo signIn() ?>
+    				<ul class="dropdown-menu">
+          				<li> <a href="../logout.php?origin=<?php echo "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]" ?>"><span class="glyphicon glyphicon-user"></span>Log out</a></li>
+       				</ul>
+    			</li>
   			</ul>
   	</div>
 </nav>
 
 
+<?php /*
+<!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-center">
+                    <li>
+                        <a href="../index3.php" style="font-size: 30px;">Home</a><
+                    </li>
+                    <li>
+                        <a href="../beer.php" style="font-size: 30px;">Beer</a>
+                    </li>
+                    <li>
+                        <a href="../merch.php" style="font-size: 30px;">Gifts</a>
+                    </li>
+                     <li>
+                        <a href="../contact.php" style="font-size: 30px;">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+*/?>
 
 
-<div id="container-fluid"> <!-- whole page width-->
+<div id="container-fluid"> 
 
     <div class="row" style="background-color: cyan;">
       <div class="col-md-3"></div>
@@ -125,4 +147,4 @@ function signIn ()
 
     </div>
 
-</div>
+</div> 

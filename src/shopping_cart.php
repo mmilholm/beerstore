@@ -17,8 +17,12 @@ if (isset($_POST['empty'])) {
 
 ?>
 
+
 <!-- The stript for the header -->
 <?php require 'view/header.php'; ?>
+
+
+
 <div id="container-fluid">
 	<div class="row">
 
@@ -28,7 +32,7 @@ if (isset($_POST['empty'])) {
 			<form action="/shopping_cart.php" method="post">
         		<?php
 		  			if (!isset($_SESSION['cart'])) {
-        				echo "Your cart is empty";
+        				echo "Your cart is empty. If you want to drink beer you need to buy beer!";
     	  			} else {
             			$cartItem = 0;
 

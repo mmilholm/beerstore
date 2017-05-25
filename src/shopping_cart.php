@@ -151,6 +151,27 @@ if (isset($_POST['empty'])) {
 </div> <!-- closes body container-fluid -->
 
 
+<?php	
+	if (isset($_POST['checkout']) || isset($_POST['update'])) {
+		
+		unset($_SESSION['cart']);
+		
+		for($i = 0; $i < $cartItem; $i++) {
+            $quantity = filter_input(INPUT_POST, "quantity$i", FILTER_VALIDATE_INT);
+          	$product = filter_input(INPUT_POST, "prod_id$i", FILTER_VALIDATE_INT);
+          	$price = filter_input(INPUT_POST, "price$i", FILTER_VALIDATE_FLOAT);
+
+            cartItems($quantity, $product, $price);
+        }
+    } elseif(isset($_POST['empty'])) {
+	    unset($_SESSION['cart']);
+	}
+?>
+
+
+
+
+
 
 <div id="popover" style="display: none">
 	<a class="btn btn-success" href="#"><span class="glyphicon glyphicon-plus" ></span></a>

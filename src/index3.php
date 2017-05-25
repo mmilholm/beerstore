@@ -48,7 +48,6 @@ if (isset($_POST['addItem'])) {
 
 <body>
 
-<?php require 'view/header.php'; ?>
 
 <div class="container text-center">
 	<div class="row">

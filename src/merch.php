@@ -90,6 +90,7 @@ if (isset($_POST['addItem']) && isset($_GET['itemType'])) {
               </form><br>
               <form action="" method="get">
               <button class="btn btn-info btn-lg" name = "itemType" type="submit" value="7" style="width: 175px;"> Accessories </button>
+            </form>
         </div>
 
     </div>

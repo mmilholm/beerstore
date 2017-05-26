@@ -6,6 +6,9 @@
           data-description="Payment Checkout"
           data-amount="<?php echo $total * 100; ?>"
           data-locale="auto"
-          data-currency="cad"></script>
+          data-currency="cad"
+          data-billing-address="true"
+		  data-shipping-address="true"
+		  ></script>
 	<input type="hidden" name="amount" value="<?php echo $total * 100; ?>" />
 </form>

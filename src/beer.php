@@ -74,12 +74,9 @@ if (isset($_POST['addItem']) && isset($_GET['itemType'])) {
 
 
 
-<div id="container-fluid">
+<div class="container text-center">
   <div class="row">
-    <div class="col-xs-12 col-sm-6 col-md-2 col-md-offset-1" style="border: 1px solid black;">
-      <div class="row">
-
-        <div class="col-sm-10 well">
+    <div class="col-sm-3 well" style="border: 1px solid black;">
           <!-- could put a search form here is wanted -->
               <form action="" method="post">
               <button class="btn btn-info btn-lg" name = "seshReset" type="submit" value="1"  style="width: 175px;"> Reset Session </button>
@@ -98,12 +95,9 @@ if (isset($_POST['addItem']) && isset($_GET['itemType'])) {
               </form>
 
 
-        </div>
- 
     </div>
-  </div>
 
-    <div class="col-xs-12 col-sm-6 col-md-8" style="border: 1px solid black;">
+    <div class="col-sm-9" style="border: 1px solid black;">
       <?php
         if (isset($_GET['itemType'])){
   			  $count = 0;
@@ -112,7 +106,7 @@ if (isset($_POST['addItem']) && isset($_GET['itemType'])) {
       			if ($count % 3 == 0) echo '<div class="row">';
   		?>
   				<div class="col-sm-4">
-  					<div class="well text-center">
+  					<div class="well">
   						<form action = "" method = "post">
       						<fieldset>
                   				<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#<?php echo $item['prod_id']; ?>">
@@ -144,9 +138,9 @@ if (isset($_POST['addItem']) && isset($_GET['itemType'])) {
       <?php
       }
       ?>
-  		</div>
-
-  	</div>
+  	  </div>
+	</div>
+</div>
 
           <?php
               $getUserID = 0;

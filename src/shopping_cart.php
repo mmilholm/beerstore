@@ -3,6 +3,25 @@ session_start();
 require_once "model/db_functions.php";
 require "model/cartItems.php";
 
+if (isset($_POST['plusOne']))
+{  
+  $_SESSION['cart'][$_POST['prod_id']][0]++;
+  $_SESSION['cart'][$_POST['prod_id']][1] = $_SESSION['cart'][$_POST['prod_id']][0] * $_POST['prod_price'];
+}
+
+if (isset($_POST['minusOne']))
+{
+  $_SESSION['cart'][$_POST['prod_id']][0]--;
+  $_SESSION['cart'][$_POST['prod_id']][1] = $_SESSION['cart'][$_POST['prod_id']][0] * $_POST['prod_price'];  
+  if ($_SESSION['cart'][$_POST['prod_id']][0] < 1)
+    unset($_SESSION['cart'][$_POST['prod_id']]);
+}
+if (isset($_POST['delete']))
+{
+  echo $prod_id;
+  unset($_SESSION['cart'][$_POST['prod_id']]);
+}
+
 if (isset($_POST['update'])) {
     header ('Location: index3.php');
 }
@@ -80,82 +99,47 @@ if (isset($_POST['empty'])) {
     	<div class="col-xs-12 col-sm-6 col-md-9" style="border: 1px solid black;">
 
       		<table class="table table-striped">
-			<form action="/shopping_cart.php" method="post">
+			
         		<?php
 		  			if (!isset($_SESSION['cart'])) {
         				echo "Your cart is empty. If you want to drink beer you need to buy beer!";
-    	  			} else {
+    	  			} 
+              else 
+              {
             			$cartItem = 0;
 
             			//Iterate through the current cart session
             			foreach($_SESSION['cart'] as $key => $value) {
                 			//Quere the DB for the info related to the prod_id
                 			$product = getProduct($key);
-
-                			foreach ($product as $item) {
                 ?>
 
                         		<tr>
-                          			<td>
-                            			<img class="img-thumbnail" style = "height:100px; width:100px;" src="<?php echo $item[prod_picture]; ?>">
-
-                          			</td>
-                          			<td>
-				<?php 					echo $item['company_name'] . "<br> " . $item['prod_name'] . "<br> " . $item['prod_price'];
-                            }
-                            $isFirst = true;
-                            foreach($value as $val) {
-                            	if ($isFirst) {
-                                	$quantity = (int) $val;
-                                	$isFirst = false;
-                                } else {
-                                	$price = $val;
-                                }
-                            }
-                ?>
-
-                            <br>
-
-                            Quantity:    <?php echo $quantity ?>
-
-                            <!-- Quantity -->
-            				<input type="hidden" name="quantity<?php echo $cartItem ?>"  id="quantity<?php echo $cartItem ?>" value="<?php echo $quantity ?>" min="0" max="10">
-
-           					 <!-- SubTotal -->
-
-            				<input type="text" id="subTotal<?php echo $cartItem ?>" value="<?php echo $price ?>" readonly>
-
-            				<!-- Price of individual product (hidden) -->
-            				<input type="hidden" name="price<?php echo $cartItem ?>" id="price<?php echo $cartItem ?>" value="<?php echo $item['prod_price']?>">
-
-            				<!-- The product id (hidden) -->
-           					 <input type="hidden" name="prod_id<?php echo $cartItem ?>" id="prod_id" value="<?php echo $item['prod_id'] ?>">
-		    				<!-- JavaScript to update the subtotal automatically -->
-		    				<script> updateSubTotal("<?php echo $cartItem ?>") </script>
-		   					 <!-- <script> updateTotal("<?php echo $cartItem ?>") </script>  -->
-
-
-                            <br>
-                          			</td>
-                                <td>
-                                <div id="popover" style="">
-                                	<a class="btn btn-success" href="#"><span class="glyphicon glyphicon-plus" ></span></a>
-                                	<a class="btn btn-warning" href="#"><span class="glyphicon glyphicon-minus"></span></a>
-                                	<a class="btn btn-danger" href="#"><span class="glyphicon glyphicon-trash"></span></a>
-                                </div>
-                              </td>
-
-
+                                <form action="/shopping_cart.php" method="post"> 
+                                		<td>
+                                  			<img class="img-thumbnail" style = "height:100px; width:100px;" src="<?php echo $product[prod_picture]; ?>">
+                                			</td>
+                                			<td>                                  
+            				                    <?php echo $product['company_name'] . "<br> " . $product['prod_name'] . "<br> "; ?>
+                                        <?php echo $_SESSION['cart'][$product['prod_id']][0] ." x $" . $product['prod_price']; ?>
+                                        <br>                             				
+                             					  <input type="hidden" name="prod_id" id="prod_id" value="<?php echo $product['prod_id'] ?>">
+                                        <input type="hidden" name="prod_price" id="prod_price" value="<?php echo $product['prod_price'] ?>">
+                                			</td>
+                                      <td>
+                                      <div style="padding-top: 25px">
+                                      	<button class="btn btn-success" name="plusOne" type="submit" ><div class="glyphicon glyphicon-plus" ></div></button>
+                                      	<button class="btn btn-warning" name="minusOne" type="submit"><div class="glyphicon glyphicon-minus"></div></button>
+                                      	<button class="btn btn-danger" name="delete" type="submit"><div class="glyphicon glyphicon-trash"></div></button>
+                                      </div>
+                                    </td>
+                                </form>
                         		</tr>
+                <?php 
 
-
-
-                        <?php
-                        $cartItem += 1;
-
-                        }
-					}
-                        ?>
+                    }
+                  }
+                ?>
       			</table>
 
     	</div> <!-- end of first content area -->
@@ -168,34 +152,31 @@ if (isset($_POST['empty'])) {
           <?php
           		define("TAX", 0.07);
           		$subtotal = 0.0;
-          		foreach ($_SESSION['cart'] as $product)
-          		{
-                    $subtotal += $product[1];
-                }
-                $subtotal = number_format($subtotal, 2);
-                $taxes = number_format(($subtotal * TAX), 2);
-          		$total = number_format(($subtotal + $taxes), 2);
+              if (isset($_SESSION['cart']))
+              {
+              		foreach ($_SESSION['cart'] as $product)
+              		{
+                        $subtotal += $product[1];
+                  }
+                  $subtotal = number_format($subtotal, 2);
+                  $taxes = number_format(($subtotal * TAX), 2);
+            		  $total = number_format(($subtotal + $taxes), 2);
 
+                  echo "Subtotal price: \$$subtotal <br>";
+                  echo "Taxes: \$$taxes <br><hr>";
+                  echo "Total: \$$total <br>";
+              }
+          ?>
 
-                echo "Subtotal price: \$$subtotal <br>";
-                echo "Taxes: \$$taxes <br><hr>";
-                echo "Total: \$$total <br>";
-          ?></br></br>
+          </br></br>
 
-
-
-
+          <form action="/shopping_cart.php" method="post">
              <button name="checkout" type="submit" value""> CHECKOUT </button>
              <button name="update" type="submit" value"">  CONTINUE SHOPPING </button>
              <button name="empty" type="submit">EMPTY CART </button>
-           </form>
+          </form>
 			<!-- Stripe Button Code -->
 			<?php require 'checkout.php'; ?>
-
-
-
-
-
 
         </div>
 
@@ -209,6 +190,7 @@ if (isset($_POST['empty'])) {
 
 
 <?php
+
 	if (isset($_POST['checkout']) || isset($_POST['update'])) {
 
 		unset($_SESSION['cart']);
@@ -218,57 +200,16 @@ if (isset($_POST['empty'])) {
           	$product = filter_input(INPUT_POST, "prod_id$i", FILTER_VALIDATE_INT);
           	$price = filter_input(INPUT_POST, "price$i", FILTER_VALIDATE_FLOAT);
 
-            cartItems($quantity, $product, $price);
+           /* cartItems($quantity, $product, $price);*/
         }
     } elseif(isset($_POST['empty'])) {
 	    unset($_SESSION['cart']);
 	}
 ?>
 
-
-
-
-
-
 <div id="container-fluid" style="border: 1px solid black;height:50px;">
 footer
 </div>
-
-<script language="javascript" type="text/javascript" >
-	$(function() {
-	var pop = $('.popbtn');
-	var row = $('.row:not(:first):not(:last)');
-
-
-	pop.popover({
-		trigger: 'manual',
-		html: true,
-		container: 'body',
-		placement: 'bottom',
-		animation: false,
-		content: function() {
-			return $('#popover').html();
-		}
-	});
-
-
-	pop.on('click', function(e) {
-		pop.popover('toggle');
-		pop.not(this).popover('hide');
-	});
-
-	$(window).on('resize', function() {
-		pop.popover('hide');
-	});
-
-	row.on('touchend', function(e) {
-		$(this).find('.popbtn').popover('toggle');
-		row.not(this).find('.popbtn').popover('hide');
-		return false;
-	});
-
-});
-</script>
 
 <!-- jQuery -->
 <script src="js/jquery.js"></script>
@@ -284,6 +225,5 @@ footer
 
 
 </body>
-
 
 </html>

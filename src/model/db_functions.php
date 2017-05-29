@@ -68,9 +68,9 @@ function getProduct($prod_id)
     $statement = $dbc->prepare($query);
     $statement->bindValue(':product', $prod_id);
     $statement->execute();
-    $items = $statement->fetchAll();
+    $item = $statement->fetch();
     $statement->closeCursor();
-    return $items;
+    return $item;
 
 }
 

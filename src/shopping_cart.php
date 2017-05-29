@@ -5,29 +5,21 @@ require "model/cartItems.php";
 
 if (isset($_POST['plusOne']))
 {  
-  $_SESSION['cart'][$_POST['prod_id']][0]++;
-  $_SESSION['cart'][$_POST['prod_id']][1] = $_SESSION['cart'][$_POST['prod_id']][0] * $_POST['prod_price'];
+  $_SESSION['cart'][$_POST['prod_id']]['quantity']++;
+  $_SESSION['cart'][$_POST['prod_id']]['subtotal'] = $_SESSION['cart'][$_POST['prod_id']]['quantity'] * $_POST['prod_price'];
 }
 
 if (isset($_POST['minusOne']))
 {
-  $_SESSION['cart'][$_POST['prod_id']][0]--;
-  $_SESSION['cart'][$_POST['prod_id']][1] = $_SESSION['cart'][$_POST['prod_id']][0] * $_POST['prod_price'];  
-  if ($_SESSION['cart'][$_POST['prod_id']][0] < 1)
+  $_SESSION['cart'][$_POST['prod_id']]['quantity']--;
+  $_SESSION['cart'][$_POST['prod_id']]['subtotal'] = $_SESSION['cart'][$_POST['prod_id']]['quantity'] * $_POST['prod_price'];  
+  if ($_SESSION['cart'][$_POST['prod_id']]['quantity'] < 1)
     unset($_SESSION['cart'][$_POST['prod_id']]);
 }
 if (isset($_POST['delete']))
 {
   echo $prod_id;
   unset($_SESSION['cart'][$_POST['prod_id']]);
-}
-
-if (isset($_POST['update'])) {
-    header ('Location: index3.php');
-}
-
-if (isset($_POST['checkout'])) {
-    header ('Location: shopping_cart.php');
 }
 
 if (isset($_POST['empty'])) {
@@ -121,7 +113,7 @@ if (isset($_POST['empty'])) {
                                 			</td>
                                 			<td>                                  
             				                    <?php echo $product['company_name'] . "<br> " . $product['prod_name'] . "<br> "; ?>
-                                        <?php echo $_SESSION['cart'][$product['prod_id']][0] ." x $" . $product['prod_price']; ?>
+                                        <?php echo $_SESSION['cart'][$product['prod_id']]['quantity'] ." x $" . $product['prod_price']; ?>
                                         <br>                             				
                              					  <input type="hidden" name="prod_id" id="prod_id" value="<?php echo $product['prod_id'] ?>">
                                         <input type="hidden" name="prod_price" id="prod_price" value="<?php echo $product['prod_price'] ?>">
@@ -150,17 +142,17 @@ if (isset($_POST['empty'])) {
           <hr>
 
           <?php
-          		define("TAX", 0.07);
-          		$subtotal = 0.0;
+          	  define("TAX", 0.07);
+          	  $subtotal = 0.0;
               if (isset($_SESSION['cart']))
               {
               		foreach ($_SESSION['cart'] as $product)
               		{
-                        $subtotal += $product[1];
+                        $subtotal += $product['subtotal'];
                   }
                   $subtotal = number_format($subtotal, 2);
                   $taxes = number_format(($subtotal * TAX), 2);
-            		  $total = number_format(($subtotal + $taxes), 2);
+            	  $total = number_format(($subtotal + $taxes), 2);
 
                   echo "Subtotal price: \$$subtotal <br>";
                   echo "Taxes: \$$taxes <br><hr>";
@@ -171,8 +163,6 @@ if (isset($_POST['empty'])) {
           </br></br>
 
           <form action="/shopping_cart.php" method="post">
-             <button name="checkout" type="submit" value""> CHECKOUT </button>
-             <button name="update" type="submit" value"">  CONTINUE SHOPPING </button>
              <button name="empty" type="submit">EMPTY CART </button>
           </form>
 			<!-- Stripe Button Code -->
@@ -190,19 +180,7 @@ if (isset($_POST['empty'])) {
 
 
 <?php
-
-	if (isset($_POST['checkout']) || isset($_POST['update'])) {
-
-		unset($_SESSION['cart']);
-
-		for($i = 0; $i < $cartItem; $i++) {
-            $quantity = filter_input(INPUT_POST, "quantity$i", FILTER_VALIDATE_INT);
-          	$product = filter_input(INPUT_POST, "prod_id$i", FILTER_VALIDATE_INT);
-          	$price = filter_input(INPUT_POST, "price$i", FILTER_VALIDATE_FLOAT);
-
-           /* cartItems($quantity, $product, $price);*/
-        }
-    } elseif(isset($_POST['empty'])) {
+	if(isset($_POST['empty'])) {
 	    unset($_SESSION['cart']);
 	}
 ?>

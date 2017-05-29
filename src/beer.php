@@ -74,7 +74,7 @@ if (isset($_POST['addItem']) && isset($_GET['itemType'])) {
 
 
 
-<div class="container text-center">
+<div class="container-fluid text-center">
   <div class="row">
     <div class="col-sm-3 well" style="border: 1px solid black;">
           <!-- could put a search form here is wanted -->

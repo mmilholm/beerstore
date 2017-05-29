@@ -63,18 +63,18 @@ require "model/cartItems.php";
 <?php require 'view/header.php'; ?>
 
 <div id="container-fluid" style="border: 1px solid black;height: 500px;"> <!-- Center of page between header and footer -->
+<div id ="row">
+<div class="col-md-3" style="border: 1px solid red;">Here</div>
+<div class="col-md-6" style="border: 1px solid red;">
+  <div class="row carousel-holder">
 
-
-<div class="col-md-5" style="border: 1px solid red;">
-<div class="row carousel-holder">
-
-    <div class="col-md-12">
-        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-            <ol class="carousel-indicators">
-                <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-                <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-                <li data-target="#carousel-example-generic" data-slide-to="2"></li>
-            </ol>
+      <div class="col-md-12">
+          <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+              <ol class="carousel-indicators">
+                  <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                  <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+                  <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+              </ol>
             <div class="carousel-inner">
                 <div class="item active">
                     <img class="slide-image" src="http://placehold.it/800x300" alt="">
@@ -92,11 +92,13 @@ require "model/cartItems.php";
             <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
                 <span class="glyphicon glyphicon-chevron-right"></span>
             </a>
-        </div>
-    </div>
+          </div>
+      </div>
 
+  </div>
 </div>
-</div>
+<div class="col-md-3" style="border: 1px solid red;">BLAHHH</div>
+</div> <!-- end of row -->
 
 
 </div> <!-- end of center div -->

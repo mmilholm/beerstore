@@ -4,14 +4,14 @@ require_once "model/db_functions.php";
 require "model/cartItems.php";
 
 if (isset($_POST['addItem']) && isset($_GET['itemType'])) {
-	if ($_GET['itemType'] == 1) {
-		header('Location: beer.php?itemType=1');
-	} elseif ($_GET['itemType'] == 2) {
-		header('Location: beer.php?itemType=2');
-	} elseif ($_GET['itemType'] == 3) {
+	if ($_GET['itemType'] == 3) {
 		header('Location: beer.php?itemType=3');
 	} elseif ($_GET['itemType'] == 4) {
 		header('Location: beer.php?itemType=4');
+	} elseif ($_GET['itemType'] == 5) {
+		header('Location: beer.php?itemType=5');
+	} elseif ($_GET['itemType'] == 6) {
+		header('Location: beer.php?itemType=6');
 	}
 }
 ?>
@@ -82,16 +82,16 @@ if (isset($_POST['addItem']) && isset($_GET['itemType'])) {
               <button class="btn btn-info btn-lg" name = "seshReset" type="submit" value="1"  style="width: 175px;"> Reset Session </button>
             </form><br>
               <form action="" method="get">
-              <button class="btn btn-info btn-lg" name = "itemType" type="submit" value="1" style="width: 175px;"> Ale </button>
+              <button class="btn btn-info btn-lg" name = "itemType" type="submit" value="3" style="width: 175px;"> Ale </button>
               </form><br>
               <form action="" method="get">
-              <button class="btn btn-info btn-lg" name = "itemType" type="submit" value="2" style="width: 175px;"> Lager </button>
+              <button class="btn btn-info btn-lg" name = "itemType" type="submit" value="4" style="width: 175px;"> Lager </button>
               </form><br>
               <form action="" method="get">
-              <button class="btn btn-info btn-lg" name = "itemType" type="submit" value="3" style="width: 175px;"> Stout </button>
+              <button class="btn btn-info btn-lg" name = "itemType" type="submit" value="5" style="width: 175px;"> Stout </button>
               </form><br>
               <form action="" method="get">
-              <button class="btn btn-info btn-lg" name = "itemType" type="submit" value="4" style="width: 175px;"> IPA </button>
+              <button class="btn btn-info btn-lg" name = "itemType" type="submit" value="6" style="width: 175px;"> IPA </button>
               </form>
 
 
@@ -100,8 +100,11 @@ if (isset($_POST['addItem']) && isset($_GET['itemType'])) {
     <div class="col-sm-9" style="border: 1px solid black;">
       <?php
         if (isset($_GET['itemType'])){
-  			  $count = 0;
       		$items = getProdInfo($_GET['itemType']);
+      	} elseif (isset($_GET['prodType'])) {
+      		$items = getProdInfoWithType ($_GET['prodType']);
+      	}
+      	    $count = 0;
       		foreach ($items as $item) {
       			if ($count % 3 == 0) echo '<div class="row">';
   		?>
@@ -136,7 +139,7 @@ if (isset($_POST['addItem']) && isset($_GET['itemType'])) {
   			}
   		?>
       <?php
-      }
+      //}
       ?>
   	  </div>
 	</div>

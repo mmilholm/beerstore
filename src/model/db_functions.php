@@ -90,6 +90,29 @@ function getProdInfo($category)
 
 }
 
+function getProdInfoWithType($prodType)
+{
+	$prodType = (int) $prodType;
+	global $dbc;
+	
+	$query = 'select * 
+			  from tblProducts prod JOIN tblProductCategories prodcat
+			  ON prod.cat_id = prodcat.cat_id
+			  WHERE prodcat.prod_type = :prodType';
+	$statement = $dbc->prepare($query);
+	$statement->bindValue(':prodType', $prodType);
+	$statement->execute();
+    $items = $statement->fetchAll();
+    $statement->closeCursor();
+    return $items;
+			  
+
+
+
+}
+
+
+
 
 function idSearch($prodID)
 {

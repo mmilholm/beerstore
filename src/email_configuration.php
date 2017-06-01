@@ -44,7 +44,7 @@ function sendConfirmationEmail($customerEmail) {
 	$mail->Subject = 'Beer Store order confirmation';
 	//Read an HTML message body from an external file, convert referenced images to embedded,
 	//convert HTML into a basic plain-text alternative body
-	$mail->msgHTML(file_get_contents('contents.php'), dirname(__FILE__));
+	$mail->msgHTML(file_get_contents('contents.html'), dirname(__FILE__));
 
 	//$mail->Body = 'Duffman is here to refill your beer! Oh, yeah!';
 	//Replace the plain text body with one created manually

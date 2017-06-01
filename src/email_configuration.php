@@ -16,7 +16,7 @@ function sendConfirmationEmail($customerEmail) {
 	// 0 = off (for production use)
 	// 1 = client messages
 	// 2 = client and server messages
-	$mail->SMTPDebug = 2;
+	$mail->SMTPDebug = 0;
 	//Ask for HTML-friendly debug output
 	$mail->Debugoutput = 'html';
 	//Set the hostname of the mail server
@@ -44,9 +44,9 @@ function sendConfirmationEmail($customerEmail) {
 	$mail->Subject = 'Beer Store order confirmation';
 	//Read an HTML message body from an external file, convert referenced images to embedded,
 	//convert HTML into a basic plain-text alternative body
-	//$mail->msgHTML(file_get_contents('contents.html'), dirname(__FILE__));
+	$mail->msgHTML(file_get_contents('contents.php'), dirname(__FILE__));
 
-	$mail->Body = 'Duffman is here to refill your beer! Oh, yeah!';
+	//$mail->Body = 'Duffman is here to refill your beer! Oh, yeah!';
 	//Replace the plain text body with one created manually
 	//$mail->AltBody = 'This is a plain-text message body';
 	//Attach an image file
@@ -58,7 +58,6 @@ function sendConfirmationEmail($customerEmail) {
     	echo "Message sent!";
 	}
 }
-
 
 
 

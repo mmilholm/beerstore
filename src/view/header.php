@@ -27,7 +27,8 @@ function signIn ()
 
 
 <body>
-
+<div class="container-fluid" style="background-color: aqua;"> <!-- add header bg img in here -->
+<div class="row">
 <nav class="navbar" id="topBar">
 	<div class="container-fluid" style="height: 135px;">
 			<ul class="nav navbar-nav navbar-right">
@@ -41,7 +42,7 @@ function signIn ()
   			</ul>
   	</div>
 </nav>
-
+</div>
 
 <?php /*
 <!-- Navigation -->
@@ -77,15 +78,15 @@ function signIn ()
         </div>
         <!-- /.container -->
     </nav>
- 
+
 */?>
 
-
+<div class="row">
 <div id="container-fluid">
 
     <div class="row" style="background-color: cyan;">
       <div class="col-md-3"></div>
-      <div class="col-md-2"><a href="../index3.php" style="font-size: 30px;">Home</a></div>
+      <div class="col-md-2"><a href="../index.php" style="font-size: 30px;">Home</a></div>
       <div class="col-md-2"><a href="../beer.php?prodType=1" style="font-size: 30px;">Beer</a></div>
       <div class="col-md-2"><a href="../merch.php?prodType=2" style="font-size: 30px;">Gifts</a></div>
       <div class="col-md-2"><a href="../contact.php" style="font-size: 30px;">Contact</a></div>
@@ -94,4 +95,6 @@ function signIn ()
 
     </div>
 
-</div>
+  </div>
+  </div>
+  </div>

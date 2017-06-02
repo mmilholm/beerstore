@@ -38,23 +38,6 @@
 	
 	sendConfirmationEmail($email);
 	
-	
-	
-	/*
-	
-			'billingName' => $billingName,
-			'billingAddressLine' => $billingAddressLine,
-			'billingAddressZip' => $billingAddressZip,
-			'billingAddressState' => $billingAddressState,
-			'billingAddressCity' => $billingAddressCity,
-			'billingAddressCountry' => $billingAddressCountry,
-			'shippingName' => $shippingName,
-			'shippingAddressLine' => $shippingAddressLine,
-			'shippingAddressZip' => $shippingAddressZip,
-			'shippingAddressState' => $shippingAddressState,
-			'shippingAddressCity' => $shippingAddressCity,
-			'shippingAddressCountry' => $shippingAddressCountry
-	*/
 ?>
 
 

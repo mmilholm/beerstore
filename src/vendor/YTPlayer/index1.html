@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<!--–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+  jquery.mb.components                                                                                                                              –
+                                                                                                                                                    –
+  file: index.tmpl                                                                                                                                  –
+  last modified: 05/01/16 17.43                                                                                                                     –
+                                                                                                                                                    –
+  Open Lab s.r.l., Florence - Italy                                                                                                                 –
+                                                                                                                                                    –
+  email: matteo@open-lab.com                                                                                                                        –
+  site: http://pupunzi.com                                                                                                                          –
+        http://open-lab.com                                                                                                                         –
+  blog: http://pupunzi.open-lab.com                                                                                                                 –
+  Q&A:  http://jquery.pupunzi.com                                                                                                                   –
+                                                                                                                                                    –
+  Licences: MIT, GPL                                                                                                                                –
+     http://www.opensource.org/licenses/mit-license.php                                                                                             –
+     http://www.gnu.org/licenses/gpl.html                                                                                                           –
+                                                                                                                                                    –
+  Copyright (c) 2001-2016. Matteo Bicocchi (Pupunzi);                                                                                               –
+  –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––-->
+
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>youtube Chromeless Player - mb.YTPlayer</title>
+
+	<link href="css/jquery.mb.YTPlayer.min.css?_bn=6252" media="all" rel="stylesheet" type="text/css">
+	<script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
+	<script src="jquery.mb.YTPlayer.js"></script>
+
+
+	<script>
+	var isIframe = function() {
+		var a = !1;
+		try {
+			self.location.href != top.location.href && ( a = !0 )
+		} catch ( b ) {
+			a = !0
+		}
+		return a
+	};
+
+	jQuery( function() {
+
+	
+
+		var should_remember = $.mbCookie.get( "YTP_should_remember" );
+		if ( should_remember )
+			$( "#should_remember" ).attr( "checked", "checked" );
+
+		$( "#should_remember" ).on( "change", function() {
+			if ( $( this ).is( ":checked" ) ) {
+				$.mbCookie.set( "YTP_should_remember", "true", 1 );
+			} else {
+				$.mbCookie.remove( "YTP_should_remember" );
+			}
+		} );
+
+		var myPlayer = jQuery( "#bgndVideo" ).YTPlayer( {
+			remember_last_time: should_remember,
+			onReady: function( player ) {
+				YTPConsole.append( player.id + " player is ready" );
+				YTPConsole.append( "<br>" );
+			}
+		} );
+
+		var YTPConsole = jQuery( "#eventListener" );
+		// EVENT: YTPStart YTPEnd YTPLoop YTPPause YTPBuffering
+		myPlayer.on( "YTPStart YTPEnd YTPLoop YTPPause YTPBuffering YTPMuted YTPUnmuted", function( e ) {
+			YTPConsole.append( "event: " + e.type + " (" + jQuery( "#bgndVideo" ).YTPGetPlayer().getPlayerState() + ") > time: " + e.time );
+			YTPConsole.append( "<br>" );
+		} );
+
+
+		
+		
+
+
+
+
+
+
+		
+	} );
+	
+
+	
+
+
+	</script>
+</head>
+
+<body>
+	
+	<div id="bgndVideo" class="player" data-property="{videoURL:'ekgzCPauXQM',containment:'body', showControls:true, autoPlay:true, loop:true, vol:0, mute:true, startAt:10,ratio:16/9, stopAt:150, opacity:1, addRaster:true, quality:'hd720', optimizeDisplay:true}">Hello</div>
+
+
+
+</body>
+
+</html>

@@ -8,12 +8,13 @@ require_once "model/db_functions.php";
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link rel="stylesheet" type="text/css" href="css/basecss.css">
+
 <title>the beer shoppe - Camosun ICS Year One Project</title>
 </head>
 
 <body>
 
-
+<div id="bgndVideo" class="player" data-property="{videoURL:'ekgzCPauXQM',containment:'body', showControls:true, autoPlay:true, loop:true, vol:0, mute:true, startAt:30,ratio:16/9, stopAt:42, opacity:1, addRaster:true, quality:'medium', optimizeDisplay:true}"></div>
 <div id="header_div">
 	<div id="login_div">
 	<a href=""> Hello, Sign in </a>  / <a href=""> Cart(#) </a>
@@ -106,6 +107,7 @@ require_once "model/db_functions.php";
 footer
 </div>
 
-
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+<script src="../vendor/YTPlayer/jquery.mb.YTPlayer.js"></script>
 </body>
 </html>

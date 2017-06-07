@@ -3,15 +3,23 @@ session_start();
 require_once "model/db_functions.php";
 require "model/cartItems.php";
 
-if (isset($_POST['addItem']) && isset($_GET['itemType'])) {
-	if ($_GET['itemType'] == 3) {
-		header('Location: beer.php?itemType=3');
-	} elseif ($_GET['itemType'] == 4) {
-		header('Location: beer.php?itemType=4');
-	} elseif ($_GET['itemType'] == 5) {
-		header('Location: beer.php?itemType=5');
-	} elseif ($_GET['itemType'] == 6) {
-		header('Location: beer.php?itemType=6');
+define('BEER', 1);
+define('ALE', 3);
+define('LAGER', 4);
+define('STOUT', 5);
+define('IPA', 6);
+
+if (isset($_POST['addItem']) && (isset($_GET['itemType']) || isset($_GET['prodType']))) {
+	if ($_GET['itemType'] == ALE) {
+		header("Location: beer.php?itemType=" . ALE);
+	} elseif ($_GET['itemType'] == LAGER) {
+		header('Location: beer.php?itemType=' . LAGER);
+	} elseif ($_GET['itemType'] == STOUT) {
+		header('Location: beer.php?itemType=' . STOUT);
+	} elseif ($_GET['itemType'] == IPA) {
+		header('Location: beer.php?itemType=' . IPA);
+	} elseif ($_GET['prodType'] == BEER) {
+	    header('Location: beer.php?prodType=' . BEER);
 	}
 }
 ?>
@@ -76,28 +84,25 @@ if (isset($_POST['addItem']) && isset($_GET['itemType'])) {
 
 <div class="container-fluid text-center">
   <div class="row">
-    <div class="col-sm-3 well" style="border: 1px solid black;">
+    <div class="col-sm-3 well">
           <!-- could put a search form here is wanted -->
-              <form action="" method="post">
-              <button class="btn btn-info btn-lg" name = "seshReset" type="submit" value="1"  style="width: 175px;"> Reset Session </button>
-            </form><br>
               <form action="" method="get">
-              <button class="btn btn-info btn-lg" name = "itemType" type="submit" value="3" style="width: 175px;"> Ale </button>
+              <button class="btn btn-info btn-lg" name = "itemType" type="submit" value="<?php echo ALE ?>" style="width: 175px;"> Ale </button>
               </form><br>
               <form action="" method="get">
-              <button class="btn btn-info btn-lg" name = "itemType" type="submit" value="4" style="width: 175px;"> Lager </button>
+              <button class="btn btn-info btn-lg" name = "itemType" type="submit" value="<?php echo LAGER ?>"" style="width: 175px;"> Lager </button>
               </form><br>
               <form action="" method="get">
-              <button class="btn btn-info btn-lg" name = "itemType" type="submit" value="5" style="width: 175px;"> Stout </button>
+              <button class="btn btn-info btn-lg" name = "itemType" type="submit" value="<?php echo STOUT ?>"" style="width: 175px;"> Stout </button>
               </form><br>
               <form action="" method="get">
-              <button class="btn btn-info btn-lg" name = "itemType" type="submit" value="6" style="width: 175px;"> IPA </button>
+              <button class="btn btn-info btn-lg" name = "itemType" type="submit" value="<?php echo IPA ?>"" style="width: 175px;"> IPA </button>
               </form>
 
 
     </div>
 
-    <div class="col-sm-9" style="border: 1px solid black;">
+    <div class="col-sm-9">
       <?php
         if (isset($_GET['itemType'])){
       		$items = getProdInfo($_GET['itemType']);

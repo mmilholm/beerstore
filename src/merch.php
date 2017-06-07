@@ -3,13 +3,22 @@ session_start();
 require_once "model/db_functions.php";
 require "model/cartItems.php";
 
-if (isset($_POST['addItem']) && isset($_GET['itemType'])) {
-	if ($_GET['itemType'] == 7) {
-		header('Location: merch.php?itemType=7');
-	} elseif ($_GET['itemType'] == 8) {
-		header('Location: merch.php?itemType=8');
-	} elseif ($_GET['itemType'] == 9) {
-		header('Location: merch.php?itemType=9');
+define('GIFTS', 2);
+define('CLOTHING', 7);
+define('GLASSWARE', 8);
+define('ACCESSORIES', 9);
+
+
+
+if (isset($_POST['addItem']) && (isset($_GET['itemType']) || isset($_GET['prodType']))) {
+	if ($_GET['itemType'] == CLOTHING) {
+		header('Location: merch.php?itemType=' . CLOTHING);
+	} elseif ($_GET['itemType'] == GLASSWARE) {
+		header('Location: merch.php?itemType=' . GLASSWARE);
+	} elseif ($_GET['itemType'] == ACCESSORIES) {
+		header('Location: merch.php?itemType=' . ACCESSORIES);
+	} elseif ($_GET['prodType'] == GIFTS) {
+	    header('Location: merch.php?prodType=' . GIFTS);
 	}
 }
 ?>
@@ -72,33 +81,30 @@ if (isset($_POST['addItem']) && isset($_GET['itemType'])) {
 
 
 
-<div class="container text-center">
+<div class="container-fluid text-center">
   <div class="row">
-    <div class="col-sm-3" style="border: 1px solid black;">
+    <div class="col-sm-3 well">
           <!-- could put a search form here is wanted -->
-              <form action="" method="post">
-              <button class="btn btn-info btn-lg" name = "seshReset" type="submit" value="1"  style="width: 175px;"> Reset Session </button>
-            </form><br>
               <form action="" method="get">
-              <button class="btn btn-info btn-lg" name = "itemType" type="submit" value="7" style="width: 175px;"> Clothing </button>
+              <button class="btn btn-info btn-lg" name = "itemType" type="submit" value="<?php echo CLOTHING ?>" style="width: 175px;"> Clothing </button>
               </form><br>
               <form action="" method="get">
-              <button class="btn btn-info btn-lg" name = "itemType" type="submit" value="8" style="width: 175px;"> Glassware </button>
+              <button class="btn btn-info btn-lg" name = "itemType" type="submit" value="<?php echo GLASSWARE ?>" style="width: 175px;"> Glassware </button>
               </form><br>
               <form action="" method="get">
-              <button class="btn btn-info btn-lg" name = "itemType" type="submit" value="9" style="width: 175px;"> Accessories </button>
+              <button class="btn btn-info btn-lg" name = "itemType" type="submit" value="<?php echo ACCESSORIES ?>" style="width: 175px;"> Accessories </button>
             </form>
     </div>
 
 
-    <div class="col-sm-9" style="border: 1px solid black;">
+    <div class="col-sm-9">
       <?php
         if (isset($_GET['itemType'])){
       		$items = getProdInfo($_GET['itemType']);
       	} elseif (isset($_GET['prodType'])) {
       		$items = getProdInfoWithType ($_GET['prodType']);
       	}
-      		
+
   			  $count = 0;
       		foreach ($items as $item) {
       			if ($count % 3 == 0) echo '<div class="row">';

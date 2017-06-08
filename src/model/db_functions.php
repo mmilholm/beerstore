@@ -94,8 +94,8 @@ function getProdInfoWithType($prodType)
 {
 	$prodType = (int) $prodType;
 	global $dbc;
-	
-	$query = 'select * 
+
+	$query = 'select *
 			  from tblProducts prod JOIN tblProductCategories prodcat
 			  ON prod.cat_id = prodcat.cat_id
 			  WHERE prodcat.prod_type = :prodType';
@@ -105,7 +105,7 @@ function getProdInfoWithType($prodType)
     $items = $statement->fetchAll();
     $statement->closeCursor();
     return $items;
-			  
+
 
 
 
@@ -166,6 +166,34 @@ function getUser($username, $password)
     $result = $statement->fetch();
     $statement->closeCursor();
     return $result;
+}
+
+function createAccount($fname, $lname, $email, $addr, $pc, $ph, $city, $cnty, $pw){
+  $fname = preg_replace("/[^a-zA-Z]/", "", $fname);
+  $lname = preg_replace("/[^a-zA-Z]/", "", $lname);
+  $addr = preg_replace("/[^a-zA-Z0-9\s]/", "", $addr);
+  $ph = preg_replace("/[^0-9]/", "", $ph);
+  $ph = (int) $ph;
+  $city = preg_replace("/[^a-zA-Z]/", "", $city);
+  $cnty = preg_replace("/[^a-zA-Z]/", "", $cnty);
+
+  global $dbc;
+
+  $query = 'INSERT INTO tblusers(first_name, last_name, email, address, city, country, postal_code, phone, password) VALUES(:fname, :lname, :email, :addr, :city, :cnty, :pc, :ph, :pw )';
+  $statement = $dbc->prepare($query);
+  $statement->bindValue(':fname', $fname);
+  $statement->bindValue(':lname', $lname);
+  $statement->bindValue(':email', $email);
+  $statement->bindValue(':addr', $addr);
+  $statement->bindValue(':pc', $pc);
+  $statement->bindValue(':ph', $ph);
+  $statement->bindValue(':city', $city);
+  $statement->bindValue(':cnty', $cnty);
+  $statement->bindValue(':pw', $pw);
+  $statement->execute();
+  $statement->closeCursor();
+
+
 }
 
 // function cartSync()

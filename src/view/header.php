@@ -30,7 +30,7 @@ function signIn ()
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
-    </button>    
+    </button>
   </div>
   <div class="navbar-brand"></div>
   <div class="navbar-collapse collapse">
@@ -39,10 +39,10 @@ function signIn ()
                         <a href="../index3.php" >HOME</a>
                     </li>
                     <li>
-                        <a href="../beer.php">BEER</a>
+                        <a href="../beer.php?prodType=1">BEER</a>
                     </li>
                     <li>
-                        <a href="../merch.php">GIFT</a>
+                        <a href="../merch.php?prodType=2">GIFT</a>
                     </li>
                      <li>
                         <a href="../contact.php">CONTACT</a>
@@ -96,7 +96,7 @@ function signIn ()
           </li>
         </ul>
       </div>
-			
+
   	</div>
 </nav> -->
 

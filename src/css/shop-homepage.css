@@ -43,15 +43,14 @@ NAVBAR
     margin-top: -45px;
     background-repeat: no-repeat;
     background-position: center;
-    background-image: url("../dbimages/beer_logo.png");
+    background-image: url("../dbImages/beer_logo.png");
     background-size: 250px;
  
 }
 .navbar-toggle {
     z-index:3;
 }
-.navbar-inverse
-{
+.navbar-inverse{
     position: center;
     margin-top: 20%;
     background-color: black;
@@ -63,8 +62,7 @@ NAVBAR
 
 }
 
-.navbar-left
-{
+.navbar-left{
     position: center;
     margin-left: 10%;
 }

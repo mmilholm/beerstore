@@ -264,13 +264,6 @@ if (isset($_POST['empty'])) {
 
             </table>
 
-
-
-           <!-- echo "Subtotal price: \$$subtotal <br>";
-                  echo "Taxes: \$$taxes <br><hr>";
-                  echo "Total: \$$total <br><br>"; -->
-
-
 			    <div class="checkout-btn"><?php require 'checkout.php'; ?> </div>
             <br>
 

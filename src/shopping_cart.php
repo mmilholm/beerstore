@@ -125,7 +125,6 @@ if (isset($_POST['empty'])) {
             border-right-width: 4px;
         }
 
-
 	</style>
 </head>
 
@@ -151,7 +150,7 @@ if (isset($_POST['empty'])) {
 
         		        <?php
 		  			        if (!isset($_SESSION['cart'])) {
-        				        echo "Your cart is empty. If you want to drink beer you need to buy beer!";
+        				        echo "<tr><td colspan='6'>Your cart is empty. If you want to drink beer you need to buy beer! </td> </tr>";
     	  			        }
                             else
                             {
@@ -164,7 +163,7 @@ if (isset($_POST['empty'])) {
                 			        $product = getProduct($key);
                         ?>
 
-                        	    <tr>
+                                 <tr>
                                   <form action="/shopping_cart.php" method="post">
                                 		<td>
                                   			<img class="img-thumbnail" style = "height:100px; width:100px;" src="<?php echo $product[prod_picture]; ?>">
@@ -216,7 +215,7 @@ if (isset($_POST['empty'])) {
             </div>
     	</div> <!-- end of first content area -->
 
-        <div class="col-xs-12 col-sm-6 col-md-3 text-center">
+        <div class="col-xs-12 col-sm-6 col-md-3 text-center checkout-border">
 
 
             <h2>Checkout</h2>
@@ -231,11 +230,11 @@ if (isset($_POST['empty'])) {
               		{
                         $subtotal += $product['subtotal'];
                     }
-                  $subtotal = number_format($subtotal, 2);
-                  $taxes = number_format(($subtotal * TAX), 2);
-            	  $total = number_format(($subtotal + $taxes), 2);
                 }
 
+                $subtotal = number_format($subtotal, 2);
+                $taxes = number_format(($subtotal * TAX), 2);
+            	$total = number_format(($subtotal + $taxes), 2);
             ?>
 
             <table class="table">

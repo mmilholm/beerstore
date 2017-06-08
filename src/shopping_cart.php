@@ -125,6 +125,17 @@ if (isset($_POST['empty'])) {
             border-right-width: 4px;
         }
 
+
+        /* Create each row to be that same height */
+        .row.cart{
+            overflow: hidden;
+        }
+
+        .row.cart > [class*="col-"]{
+            margin-bottom: -99999px;
+            padding-bottom: 99999px;
+        }
+
 	</style>
 </head>
 
@@ -133,7 +144,7 @@ if (isset($_POST['empty'])) {
 
 
 <div>
-	<div class="row">
+	<div class="row cart">
     	<div class="col-xs-12 col-sm-6 col-md-9 products-border">
       		<div class = "row">
       		    <div class="col-12">

@@ -43,7 +43,7 @@ NAVBAR
     margin-top: -45px;
     background-repeat: no-repeat;
     background-position: center;
-    background-image: url("/dbimages/beer_logo.png");
+    background-image: url("../dbimages/beer_logo.png");
     background-size: 250px;
  
 }

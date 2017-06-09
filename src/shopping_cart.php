@@ -59,25 +59,7 @@ if (isset($_POST['empty'])) {
     <link href="https://fonts.googleapis.com/css?family=Share" rel="stylesheet">
 
 	<style>
-
-		body {
-			font-family: 'Share', cursive;
-		}
-
-		.navbar-right > li > a {
-  			padding-top: 0px;
-  			padding-bottom: 0px;
- 		}
-
-
-		.navbar {
- 			background: aqua;
-   			position: relative;
-    		margin-bottom: 0;
-    		min-height:28px;
-		}
-
-        /*  Shopping cart products table css */
+/*  Shopping cart products table css */
 
 		th {
             text-align: center;
@@ -103,11 +85,12 @@ if (isset($_POST['empty'])) {
             font-size: 18px;
         }
 
-        /* Checkout total table css */
+/* Checkout total table css */
         td {
             text-align: left;
             font-size: 18px;
         }
+
 
         .checkout-btn {
             text-align:right;
@@ -125,8 +108,7 @@ if (isset($_POST['empty'])) {
             border-right-width: 4px;
         }
 
-
-        /* Create each row to be that same height */
+/* Create each row to be that same height */
         .row.cart{
             overflow: hidden;
         }
@@ -135,8 +117,10 @@ if (isset($_POST['empty'])) {
             margin-bottom: -99999px;
             padding-bottom: 99999px;
         }
-
 	</style>
+
+
+
 </head>
 
 <!-- The stript for the header -->

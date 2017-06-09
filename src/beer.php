@@ -43,6 +43,9 @@ if (isset($_POST['addItem']) && (isset($_GET['itemType']) || isset($_GET['prodTy
     <!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
+    <!-- Individual product display CSS  -->
+    <link href="../css/individual_product.css" rel="stylesheet">
+
     <!-- Custom CSS -->
     <link href="../css/shop-homepage.css" rel="stylesheet">
 
@@ -56,25 +59,9 @@ if (isset($_POST['addItem']) && (isset($_GET['itemType']) || isset($_GET['prodTy
 
 	<style>
 
-		body {
-			font-family: 'Share', cursive;
-		}
-
-		.navbar-right > li > a {
-  			padding-top: 0px;
-  			padding-bottom: 0px;
- 		}
-
-
-		.navbar {
- 			background: aqua;
-   			position: relative;
-    		margin-bottom: 0;
-    		min-height:28px;
-		}
-
-
 	</style>
+
+
 </head>
 
 <!-- The stript for the header -->
@@ -84,7 +71,7 @@ if (isset($_POST['addItem']) && (isset($_GET['itemType']) || isset($_GET['prodTy
 
 <div class="container-fluid text-center">
   <div class="row">
-    <div class="col-sm-3 well">
+    <div class="col-sm-3">
           <!-- could put a search form here is wanted -->
               <form action="" method="get">
               <button class="btn btn-info btn-lg" name = "itemType" type="submit" value="<?php echo ALE ?>" style="width: 175px;"> Ale </button>
@@ -114,15 +101,17 @@ if (isset($_POST['addItem']) && (isset($_GET['itemType']) || isset($_GET['prodTy
       			if ($count % 3 == 0) echo '<div class="row">';
   		?>
   				<div class="col-sm-4">
-  					<div class="well">
+  					<div class="product-boarder">
   						<form action = "" method = "post">
       						<fieldset>
                   				<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#<?php echo $item['prod_id']; ?>">
 
-                  				<?php echo $item['company_name'] . "<br>" . $item['prod_name']; ?>
-                  				<br><br> <img class="img-thumbnail" style = "height:200px; width:200px;" src="<?php echo $item[prod_picture]; ?>">
-                  				    <br><br> <?php if ($item['prod_package'] != null) { echo $item['prod_package'] . " --- ";} echo "$" . $item['prod_price']; ?></p>
-
+                  				    <div class="prod-name"><?php echo $item['company_name'] . "<br>" . $item['prod_name']; ?> </div>
+                  				<br><br>
+                  				    <img class="img-thumbnail" style = "width:200px; height:200px;" src="<?php echo $item[prod_picture]; ?>">
+                  				<br><br>
+                  				    <div class="prod-price"> <?php if ($item['prod_package'] != null) { echo $item['prod_package'] . " --- ";} echo "$" . $item['prod_price']; ?> </div>
+                  				 </p>
                   				</a>
 
                   				<div id="<?php echo $item['prod_id']; ?>" class="collapse">
@@ -131,7 +120,7 @@ if (isset($_POST['addItem']) && (isset($_GET['itemType']) || isset($_GET['prodTy
                   					<input type="number" name="quantity" min="1" max="10">
                   					<input type="hidden" name="prod_id" value="<?php echo $item['prod_id']; ?>">
                   					<input type="hidden" name="price" value="<?php echo $item['prod_price']; ?>">
-                  					<button class="btn btn-info" name = "addItem" type="submit"> Add </button>
+                  					<button class="btn btn-success" name = "addItem" type="submit"> Add </button>
               					</div>
               				</fieldset>
           				</form>
@@ -236,6 +225,24 @@ if (isset($_POST['addItem']) && (isset($_GET['itemType']) || isset($_GET['prodTy
 footer
 </div>
 
+<!-- Script for hover over products for accordian to drop -->
+<script>
+
+$(function() {
+    $(document).on('mouseenter.collapse', '[data-toggle=collapse]', function(e) {
+        var $this = $(this),
+            href,
+            target = $this.attr('data-target')
+                     || e.preventDefault()
+                     || (href = $this.attr('href'))
+                     && href.replace(/.*(?=#[^\s]+$)/, ''), //strip for ie7
+            option = $(target).hasClass('in') ? 'hide' : "show"
+
+            $('.panel-collapse').not(target).collapse("hide")
+            $(target).collapse(option);
+    })
+});
+</script>
 
 <!-- jQuery -->
 <script src="js/jquery.js"></script>

@@ -14,20 +14,20 @@ body {
 NAVBAR
 */
 /*.navbar-nav > li > a {
-    padding-top:10px !important; 
+    padding-top:10px !important;
     padding-bottom:10px !important;
 }
 .navbar {
     min-height:40px !important
 }
 
-    
+
         .navbar .navbar-nav {
 @media (min-width: 768px) {
             display: inline-block;
             float: none;
         }
-        
+
         .navbar .navbar-collapse {
             text-align: center;
         }
@@ -40,21 +40,21 @@ NAVBAR
     height:230%;
     left: 0;
     text-align: center;
-    margin-top: -45px;
+    margin-top: -100px;
     background-repeat: no-repeat;
     background-position: center;
     background-image: url("../dbImages/beer_logo.png");
     background-size: 250px;
- 
+
 }
 .navbar-toggle {
     z-index:3;
 }
 .navbar-inverse{
     position: center;
-    margin-top: 20%;
+    margin-top: 95px;
     background-color: black;
-    border-color: white;    
+    border-color: white;
     border-radius: 0px;
     border-style: solid;
     border-width: 3px;
@@ -67,9 +67,14 @@ NAVBAR
     margin-left: 10%;
 }
 
+/********this was giving me problems with the scroll bar, it seem to be functioning without it ****************
+
 body {
-    overflow: hidden;
+     overflow: hidden;
 }
+
+*/
+
 
 /*.navbar-brand,
 .navbar-nav li a {

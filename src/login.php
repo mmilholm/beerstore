@@ -68,6 +68,14 @@
 
 </header>
 
+<style>
+
+
+
+
+
+</style>
+
 <body>
 
 
@@ -75,10 +83,10 @@
     <!-- Page Content -->
 
     <div class="container-fluid">
-      <div id="row">
+      <div class="row">
 
         <!-- Login -->
-        <div class="col-sm-6 text-center" style="border-right: 1px solid black;height: 300px;">
+        <div class="col-sm-6 text-center">
 
           <h1 class="text-center">Login</h1>
             <form class="" action="" method="post" enctype="multipart/form-data">

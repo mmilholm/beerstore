@@ -247,8 +247,15 @@ if (isset($_POST['empty'])) {
                 </tr>
 
             </table>
-
-			    <div class="checkout-btn"><?php require 'checkout.php'; ?> </div>
+          <?php
+          if (isset ($_SESSION['user']) && isset($_SESSION['user']['user_id'])){
+			     echo '<div class="checkout-btn">';
+          }
+          else {
+            echo ' <button type="button" disabled>Must log in to pay</button> <div style="display: none;">';
+          }
+          ?>
+          <?php require 'checkout.php'; ?> </div>
             <br>
 
         </div> <!-- end of second content area -->

@@ -169,17 +169,13 @@ function getUser($username, $password)
 }
 
 function createAccount($fname, $lname, $email, $addr, $pcode, $phnum, $city, $cnty, $pwd){
-  $fname = preg_replace("/[^a-zA-Z]/", "", $fname);
-  $lname = preg_replace("/[^a-zA-Z]/", "", $lname);
-  $addr = preg_replace("/[^a-zA-Z0-9\s]/", "", $addr);
-  $phnum = preg_replace("/[^0-9]/", "", $phnum);
+
   $phnum = (int) $phnum;
-  $city = preg_replace("/[^a-zA-Z]/", "", $city);
-  $cnty = preg_replace("/[^a-zA-Z]/", "", $cnty);
+
 
   global $dbc;
 
-  $query = 'INSERT INTO tblusers(first_name, last_name, email, address, city, country, postal_code, phone, password) VALUES(:fname, :lname, :email, :addr, :city, :cnty, :pcode, :phnum, :pwd )';
+  $query = 'INSERT INTO tblUsers(first_name, last_name, email, address, city, country, postal_code, phone, password) VALUES(:fname, :lname, :email, :addr, :city, :cnty, :pcode, :phnum, :pwd )';
   $statement = $dbc->prepare($query);
   $statement->bindValue(':fname', $fname);
   $statement->bindValue(':lname', $lname);

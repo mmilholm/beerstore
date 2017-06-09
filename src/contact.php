@@ -38,24 +38,6 @@ require "model/cartItems.php";
 
 	<style>
 
-		body {
-			font-family: 'Share', cursive;
-		}
-
-		.navbar-right > li > a {
-  			padding-top: 0px;
-  			padding-bottom: 0px;
- 		}
-
-
-		.navbar {
- 			background: aqua;
-   			position: relative;
-    		margin-bottom: 0;
-    		min-height:28px;
-		}
-
-
 	</style>
 </head>
 

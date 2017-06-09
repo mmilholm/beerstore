@@ -265,9 +265,7 @@ if (isset($_POST['empty'])) {
 	}
 ?>
 
-<div id="container-fluid" style="border: 1px solid black;height:50px;">
-footer
-</div>
+<?php require 'view/footer.php'; ?>
 
 <!-- jQuery -->
 <script src="js/jquery.js"></script>

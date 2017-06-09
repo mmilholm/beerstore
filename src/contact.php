@@ -44,9 +44,9 @@ require "model/cartItems.php";
 <!-- The stript for the header -->
 <?php require 'view/header.php'; ?>
 
-<div id="container-fluid" style="border: 1px solid black;height: 500px;"> <!-- Center of page between header and footer -->
+<div id="container-fluid"> <!-- Center of page between header and footer -->
 
-<div class="col-md-5" style="border: 1px solid red;font-size: 20px;">
+<div class="col-md-5">
 Main Offices
 <hr>
 4461 Interurban rd<br>
@@ -56,7 +56,7 @@ Technologies Building Rm 259<br><br>
 Phone: (250)363-2000<br><br>
 Email: contactus@beerstore.ics199.site
 </div>
-<div class="col-md-5" style="border: 1px solid red;">
+<div class="col-md-5">
 <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d2223.536048523393!2d-123.41626982388019!3d48.49019593039498!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sca!4v1496060689490" width="600" height="450" frameborder="0" style="border:0"></iframe>
 </div>
 
@@ -71,9 +71,7 @@ Email: contactus@beerstore.ics199.site
 
 
 
-<div id="footer_div" style="border: 1px solid black;">
-footer
-</div>
+<?php require 'view/footer.php'; ?>
 
 
 

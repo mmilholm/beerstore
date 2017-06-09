@@ -216,10 +216,7 @@ if (isset($_POST['addItem']) && (isset($_GET['itemType']) || isset($_GET['prodTy
 
 
 
-
-<div id="container-fluid" style="border: 1px solid black;height:50px;">
-footer
-</div>
+<?php require 'view/footer.php'; ?>
 
 
 <!-- Script for hover over products for accordian to drop -->

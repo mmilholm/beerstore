@@ -75,7 +75,10 @@ $amount = number_format(($amount / 100), 2);
 
 
 </head>
+<?php
+   unset($_SESSION["cart"]);
 
+ ?>
 <!-- The stript for the header -->
 <?php require 'view/header.php'; ?>
 

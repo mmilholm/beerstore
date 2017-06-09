@@ -36,7 +36,7 @@ function signIn ()
   <div class="navbar-collapse collapse">
     <ul class="nav navbar-nav navbar-left">
         <li>
-                        <a href="../index3.php" >HOME</a>
+                        <a href="../index.php" >HOME</a>
                     </li>
                     <li>
                         <a href="../beer.php?prodType=1">BEER</a>
@@ -153,4 +153,3 @@ function signIn ()
 
   </div>
   </div> -->
-

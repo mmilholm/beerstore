@@ -24,6 +24,12 @@
         $_SESSION['user']['user_id'] = $user['user_id'];
         $_SESSION['user']['first_name'] = $user['first_name'];
         $_SESSION['user']['last_name'] = $user['last_name'];
+        $_SESSION['user']['phone'] = $user['phone'];
+        $_SESSION['user']['email'] = $user['email'];
+        $_SESSION['user']['address'] = $user['address'];
+        $_SESSION['user']['postal_code'] = $user['postal_code'];
+        $_SESSION['user']['city'] = $user['city'];
+        $_SESSION['user']['country'] = $user['country'];
         header('Location:'. $_GET['origin']);
       }
       else{
@@ -34,6 +40,12 @@
         $_SESSION['user']['user_id'] = $user['user_id'];
         $_SESSION['user']['first_name'] = $user['first_name'];
         $_SESSION['user']['last_name'] = $user['last_name'];
+        $_SESSION['user']['phone'] = $user['phone'];
+        $_SESSION['user']['email'] = $user['email'];
+        $_SESSION['user']['address'] = $user['address'];
+        $_SESSION['user']['postal_code'] = $user['postal_code'];
+        $_SESSION['user']['city'] = $user['city'];
+        $_SESSION['user']['country'] = $user['country'];
         header('Location:'. $_GET['origin']);
       }
   }

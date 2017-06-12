@@ -1,7 +1,7 @@
 /* CSS for individual product display */
     .prod-name {
         font-weight: bold;
-        font-size: 22px;
+        font-size: 20px;
         color: #3D928F;
         margin-top: 10px;
         padding-bottom: 0px;
@@ -10,8 +10,9 @@
     .product-boarder {
         border-style: solid;
         border-width: 1px;
-        padding: 5px;
-        margin: 20px;
+        padding: 10px;
+        margin-bottom: 12px;
+        margin-top: 12px;
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
         border-radius: 5px;
     }
@@ -27,6 +28,6 @@
         text-decoration: none;
     }
 
-     a:hover > .prod-price {
+     .prod-price {
         color:red;
     }

@@ -101,18 +101,19 @@ if (isset($_POST['addItem']) && (isset($_GET['itemType']) || isset($_GET['prodTy
       			if ($count % 3 == 0) echo '<div class="row">';
   		?>
   				<div class="col-sm-4">
+
   					<div class="product-boarder">
   						<form action = "" method = "post">
       						<fieldset>
-                  				<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#<?php echo $item['prod_id']; ?>">
 
-                  				    <div class="prod-name"><?php echo $item['company_name'] . "<br>" . $item['prod_name']; ?> </div>
-                  				<br><br>
-                  				    <img class="img-thumbnail" style = "width:200px; height:200px;" src="<?php echo $item[prod_picture]; ?>">
+                                <div class="prod-name"><?php echo $item['company_name'] . "<br>" . $item['prod_name']; ?> </div>
+                  				<br>
+                                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#<?php echo $item['prod_id']; ?>">
+                                        <img class="img-thumbnail" style = "width:200px; height:200px;" src="<?php echo $item[prod_picture]; ?>">
+                  				    </a>
                   				<br><br>
                   				    <div class="prod-price"> <?php if ($item['prod_package'] != null) { echo $item['prod_package'] . " --- ";} echo "$" . $item['prod_price']; ?> </div>
-                  				 </p>
-                  				</a>
+                                <br>
 
                   				<div id="<?php echo $item['prod_id']; ?>" class="collapse">
                   					<?php echo $item['prod_description'] . "<br><br>" ?>

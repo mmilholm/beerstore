@@ -99,16 +99,16 @@ if (isset($_POST['addItem']) && (isset($_GET['itemType']) || isset($_GET['prodTy
   					 <div class="product-boarder">
   						<form action = "" method = "post">
       						<fieldset>
-                  				<a class="accordian-toggle" data-toggle="collapse" data-parent="#accordion" href="#<?php echo $item['prod_id']; ?>">
-
                   				    <div class="prod-name"><?php echo $item['company_name'] . "<br>" . $item['prod_name']; ?> </div>
-                  				<br><br>
+                  				<br>
+                  				<a class="accordian-toggle" data-toggle="collapse" data-parent="#accordion" href="#<?php echo $item['prod_id']; ?>">
                   				    <img class="img-thumbnail" style = "width:200px; height:200px;" src="<?php echo $item[prod_picture]; ?>">
+                  				</a>
                   				<br><br>
                   				    <div class="prod-price"> <?php if ($item['prod_package'] != null) { echo $item['prod_package'] . " --- ";} echo "$" . $item['prod_price']; ?> </div>
                   				 </p>
 
-                  				</a>
+
 
                   				<div id="<?php echo $item['prod_id']; ?>" class="collapse">
                   					<?php echo $item['prod_description'] . "<br><br>" ?>
